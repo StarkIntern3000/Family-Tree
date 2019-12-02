@@ -38,9 +38,13 @@ public class Person {
         switch (children){
             case 0:
                 left = c;
+                left.assignParent(this);
+                children++;
                 break;
             case 1:
                 right = c;
+                right.assignParent(this);
+                children++;
                 break;
             case 2:
                 //insert error for something
@@ -48,7 +52,7 @@ public class Person {
         }
     }
     public void assignParent(Person p){
-        if (parent){
+        if (parentCount){
             //error
         }
         else {
