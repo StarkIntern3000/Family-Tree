@@ -92,17 +92,25 @@ public class Person {
     public char returnGender(){
         return gender;
     }
-    public int returnHeight(){
-        return height;
+    public int returnHeight(int h){
+        height = h;
+        if (this.returnLeft() != null) {
+            height = height+1;
+            return this.returnLeft().returnHeight(height);
+        }
+        else if (this.returnRight() != null) {
+            height = height+1;
+            return this.returnLeft().returnHeight(height);
+        }
+        else {
+            return height;
+        }
     }
     public int returnDepth(int d) {
         depth = d;
         if (this.returnParent() != null) {
             depth = depth+1;
             return this.returnParent().returnDepth(depth);
-        }
-        else if (this.returnParent() == null) {
-            return depth;
         }
         else {
             return depth;
