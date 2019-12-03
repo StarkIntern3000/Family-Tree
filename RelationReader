@@ -7,7 +7,7 @@ public class RelationReader {
     }
     public Person LCA(Person pa, Person pb){
         Person A = pa, B = pb;
-        int depthA = A.returnDepth(), depthB = B.returnDepth();
+        int depthA = A.returnDepth(0), depthB = B.returnDepth(0);
         /*
             starts by getting the two compared people to the same depth - aligns them on the same generation by going to the lower depth
             also increases the distance of the deeper person accordingly
@@ -16,12 +16,12 @@ public class RelationReader {
             if (depthA > depthB){
                 A = A.returnParent();
                 dA++;
-                depthA = A.returnDepth();
+                depthA = A.returnDepth(0);
             }
             else if (depthA < depthB){
                 B = B.returnParent();
                 dB++;
-                depthB = B.returnDepth();
+                depthB = B.returnDepth(0);
             }
         }
         /*
