@@ -8,7 +8,7 @@ public class Person {
     private Person right;
     private Person parent;
     private boolean parentCount;
-    private int height, depth;
+    private int height,depth;
     
     public Person(String n, int a, boolean s, char g ){
         name = n;
@@ -17,6 +17,7 @@ public class Person {
         gender = g;
         children = 0;
         parentCount = false;
+        parent = null;
     }
     
     public void AttriEditor(String type, String newEntry){
@@ -94,8 +95,18 @@ public class Person {
     public int returnHeight(){
         return height;
     }
-    public int returnDepth(){
-        return depth;
+    public int returnDepth(int d) {
+        depth = d;
+        if (this.returnParent() != null) {
+            depth = depth+1;
+            return this.returnParent().returnDepth(depth);
+        }
+        else if (this.returnParent() == null) {
+            return depth;
+        }
+        else {
+            return depth;
+        }
     }
   
 }
