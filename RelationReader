@@ -1,0 +1,48 @@
+public class RelationReader {
+    private Person[] mainTree;
+    private int dA = 0, dB = 0;
+    private Person lowestCA;
+    public RelationReader(Person[] m){
+        mainTree = m;
+    }
+    public Person LCA(Person pa, Person pb){
+        Person A = pa, B = pb;
+        int depthA = A.returnDepth(), depthB = B.returnDepth();
+        /*
+            starts by getting the two compared people to the same depth - aligns them on the same generation by going to the lower depth
+            also increases the distance of the deeper person accordingly
+        */
+        while (depthA != depthB){
+            if (depthA > depthB){
+                A = A.returnParent();
+                dA++;
+                depthA = A.returnDepth();
+            }
+            else if (depthA < depthB){
+                B = B.returnParent();
+                dB++;
+                depthB = B.returnDepth();
+            }
+        }
+        /*
+            makes sure that LCA is at least 2 generations away
+        */
+        while (dA < 2 || dB < 2){
+            A = A.returnParent();
+            B = B.returnParent();
+            dA++;
+            dB++;
+        }
+        /*
+            compares each person's respective ancestor of that generation until they find the same person
+        */
+        while (A != B){
+            A = A.returnParent();
+            B = B.returnParent();
+            dA++;
+            dB++;
+        }
+        lowestCA = A;
+        return lowestCA;
+    } 
+}
