@@ -1,3 +1,13 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author Lenovo
+ */
 public class MainFile {
     public static void main(String args[]){
         //make TreeReader object
@@ -59,6 +69,29 @@ public class MainFile {
         {
             System.out.println(test.returnName());
             test = test.returnParent();
+        }
+        //manually inputting depth and height
+        mainTree[0].assignDepth(0);
+        mainTree[0].assignHeight(4);
+        for (int k = 1; k <= 2; k++){
+            mainTree[k].assignDepth(1);
+            mainTree[k].assignHeight(3);
+            
+        }
+        for (int k = 3; k <= 6; k++){
+            mainTree[k].assignDepth(2);
+            mainTree[k].assignHeight(2);
+            
+        }
+        for (int k = 7; k <= 14; k++){
+            mainTree[k].assignDepth(3);
+            mainTree[k].assignHeight(1);
+            
+        }
+        for (int k = 15; k <= 18; k++){
+            mainTree[k].assignDepth(4);
+            mainTree[k].assignHeight(0);
+            
         }
         
     }
