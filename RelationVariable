@@ -87,11 +87,19 @@ public class RelationVariable {
             return "Error";
         }
     }
-    public String Great(int f) {
+    public String Great(int n, int f) {
         String great = "";
-        while (f>2) {
-            great = great + "great ";
-            f = f-1;
+        if (n==0) {
+            while (f>2) {
+                great = great + "great ";
+                f = f-1;
+            }
+        }
+        else if (n==1) {
+            while (f>3) {
+                great = great + "great ";
+                f = f-1;
+            }
         }
         return great;
     }
