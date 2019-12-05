@@ -107,7 +107,7 @@ public class RelationReader /*implements RelationVariable*/{
                 return terminology.Term("nibling",dA,dB,pb.returnGender());
             }
             else {
-                return greatness.Great(furthest) + "grand" + terminology.Term("nibling",dA,dB,pb.returnGender());
+                return greatness.Great(nearest,furthest) + "grand" + terminology.Term("nibling",dA,dB,pb.returnGender());
             }
         }
         
@@ -117,7 +117,7 @@ public class RelationReader /*implements RelationVariable*/{
                 return terminology.Term("child",dA,dB,pa.returnGender());
             }
             else {
-                return greatness.Great(furthest) + "grand" + terminology.Term("child",dA,dB,pb.returnGender());
+                return greatness.Great(nearest,furthest) + "grand" + terminology.Term("child",dA,dB,pb.returnGender());
             }
         }
     }
