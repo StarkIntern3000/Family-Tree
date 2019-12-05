@@ -1,0 +1,98 @@
+/* this is for all the algorithms under Relationship */
+
+public class RelationVariable {
+    
+    public RelationVariable(){
+        
+    }
+    
+    public String Ordinal(int d) {
+        if (d == 1) {
+            return "1st ";
+        }
+        else if (d == 2) {
+            return "2nd ";
+        }
+        else if (d == 3) {
+            return "3rd ";
+        }
+        else {
+            return d + "th ";
+        }
+    }
+    public String Times(int r) {
+        if (r == 1) {
+            return "once ";
+        }
+        else if (r == 2) {
+            return "twice ";
+        }
+        else if (r == 3) {
+            return "thrice ";
+        }
+        else {
+            return Integer.toString(r) + " times ";
+        }
+    }
+    public String Term(String s,int d1,int d2,char gender) {
+        if (s.equals("nibling")) {
+            if (d1<d2) {
+                if (gender == 'N') {
+                    return "nibling";
+                }
+                else if (gender == 'F') {
+                    return "niece";
+                }
+                else {
+                    return "nephew";
+                }
+            }
+            else {
+                if (gender == 'N') {
+                    return "auncle";    //still debating on the term
+                }
+                else if (gender == 'F') {
+                    return "aunt";
+                }
+                else {
+                    return "uncle";
+                }
+            }
+        }
+        else if (s.equals("child")){
+            if (d1<d2) {
+                if (gender == 'N') {
+                    return "child";
+                }
+                else if (gender == 'F') {
+                    return "daughter";
+                }
+                else {
+                    return "son";
+                }
+            }
+            else {
+                if (gender == 'N') {
+                    return "parent";    
+                }
+                else if (gender == 'F') {
+                    return "mother";
+                }
+                else {
+                    return "father";
+                }
+            }
+        }
+        else {
+            return "Error";
+        }
+    }
+    public String Great(int f) {
+        String great = "";
+        while (f>2) {
+            great = great + "great ";
+            f = f-1;
+        }
+        return great;
+    }
+}
