@@ -34,16 +34,6 @@ public class RelationReader /*implements RelationVariable*/{
         }
         
         /*
-            makes sure that LCA is at least 2 generations away
-        */
-        while (dA < 1 || dB < 1){
-            A = A.returnParent();
-            B = B.returnParent();
-            dA++;
-            dB++;
-        }
-
-        /*
             compares each person's respective ancestor of that generation until they find the same person
         */
         while (A != B){
