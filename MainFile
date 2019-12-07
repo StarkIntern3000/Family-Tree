@@ -12,7 +12,11 @@ public class MainFile {
             Scanner scanner = new Scanner(System. in); 
             String input = scanner. nextLine();
             String[] inputArray = input.split(" ");
-            
+            try{
+                type = inputArray[0];
+            }catch(Exception e){
+                continue;
+            }
             if(inputArray.length == 1){
                 switch(type){
                     case "bye":
@@ -73,3 +77,4 @@ public class MainFile {
         }
     }
 }
+
