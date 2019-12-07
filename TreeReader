@@ -12,7 +12,7 @@ public class TreeReader {
     private char gender;
     private ArrayList<ArrayList<String>> nameListSmall, nameListBig;
     private int i = 0;
-    private int x;
+    private int x, y;
     
     public Person[] loadTree(String s){
         
@@ -42,6 +42,7 @@ public class TreeReader {
                 String inputScanned = scan.nextLine();
                 String [] lineRead = inputScanned.split(" ");
                 x = 0;
+                y = 0;
                 
                 if (lineRead[0].equals("family")) {
                     familyName = lineRead[1];
@@ -76,12 +77,19 @@ public class TreeReader {
                     System.out.println("GENDER: " + gender);
                     currentTree[x] = (new Person(name,age,sex,gender));
                     x++;
+                    System.out.println(currentTree[0].returnName());
                 }
                 
                 if (lineRead[0].equals("links")) {
                     linkCount = Integer.parseInt(lineRead[1]);
                     linkArray = new String[linkCount];
                     System.out.println("LINKS: " + linkCount);
+                }
+                
+                if (lineRead[0].equals("child")) {
+                    linkArray[y] = lineRead[1] + " " + lineRead[2];
+                    System.out.println("RELATIONSHIP:" + linkArray[y]);
+                    y++;
                 }
                 
             }
