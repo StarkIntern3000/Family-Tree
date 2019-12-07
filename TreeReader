@@ -90,6 +90,21 @@ public class TreeReader {
                     y++;
                 }
             }
+            
+            for (int m=0;m<linkArray.length;m++) {
+                String[] names = linkArray[m].split(" ");
+                String n1 = names[0];
+                String n2 = names[1];
+                
+                Person p1 = personSearch(currentTree,n1);
+                Person p2 = personSearch(currentTree,n2);
+                
+                System.out.println(p1);
+                System.out.println(p2.returnName());
+                
+                p1.addChild(p2);
+                System.out.println(p2.returnParent().returnName());
+            }
         }     
         
         return currentTree;
@@ -163,5 +178,16 @@ public class TreeReader {
         }
         return state;
     }
+    
+    public Person personSearch(Person[] tree, String s) {
+         Person found = null;
+         for (int n=0;n<tree.length;n++) {
+             Person p = tree[n];
+             if (p.returnName().equals(s)) {
+                found = p;
+             }
+         }
+         return found;
+     }
     
 }
