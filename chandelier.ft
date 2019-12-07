@@ -1,0 +1,57 @@
+family Chandelier
+count 11
+name Kyle
+age 91
+sex true
+gender N
+name Fe
+age 73
+sex false
+gender N
+name Daniel
+age 77
+sex true
+gender N
+name Alma
+age 52
+sex false
+gender N
+name Aaron
+age 49
+sex true
+gender N
+name Dane
+age 33
+sex true
+gender N
+name Juan
+age 32
+sex true
+gender N
+name Charles
+age 17
+sex true
+gender N
+name Joyce
+age 11
+sex false
+gender N
+name Floyd
+age 4
+sex true
+gender N
+name Patricia
+age 2
+sex false
+gender N
+links 10
+child Kyle Fe
+child Kyle Daniel
+child Daniel Alma
+child Daniel Aaron
+child Alma Dane
+child Alma Juan
+child Juan Charles
+child Juan Joyce
+child Charles Floyd
+child Charles Patricia

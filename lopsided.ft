@@ -1,0 +1,57 @@
+family Lopsided
+count 11
+name Clarence
+age 92
+sex true
+gender M
+name Joe
+age 73
+sex true
+gender M
+name Patricia
+age 77
+sex false
+gender M
+name Robert
+age 52
+sex true
+gender M
+name Scott
+age 49
+sex true
+gender M
+name Michael
+age 33
+sex true
+gender M
+name Bryan
+age 26
+sex true
+gender M
+name Jasmine
+age 17
+sex false
+gender M
+name Edwin
+age 11
+sex true
+gender M
+name Robyn
+age 2
+sex false
+gender M
+name Richard
+age 4
+sex true
+gender N
+links 10
+child Clarence Joe
+child Clarence Patricia
+child Patricia Robert
+child Patricia Scott
+child Robert Michael
+child Robert Bryan
+child Michael Jasmine
+child Michael Edwin
+child Jasmine Robyn
+child Jasmine Richard
