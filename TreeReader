@@ -60,7 +60,7 @@ public class TreeReader {
                 }
                 
                 if (lineRead[0].equals("age")) {
-                    age = Integer.parseInt(lineRead[i+1]);
+                    age = Integer.parseInt(lineRead[1]);
                     System.out.println("AGE: " + age);
                 }
                 
