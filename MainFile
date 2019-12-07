@@ -27,7 +27,7 @@ public class MainFile {
         mainTree[20] = new Person("U",16,true,'M');
         
         TreeReader tReader = new TreeReader();
-        tReader.loadTree("hello");
+        //tReader.loadTree("hello");
         //tReader.setMain(mainTree);
         //tReader.writeTree("Hello");
         //assigning relationships
