@@ -1,12 +1,9 @@
 public class MainFile {
     public static void main(String args[]){
-        //make TreeReader object
-        //make RelationReader object
-        //lol unless yall can come up with better names
         Person[] mainTree;
-        //insert shit for reading input from file using TreeReader
         //im gonna manually build a tree muna using the sample in the project specs
         mainTree = new Person[21];
+        RelationReader rReader = new RelationReader(mainTree);
         mainTree[0] = new Person("A",70,true,'F');
         mainTree[1] = new Person("B",50,true,'M');
         mainTree[2] = new Person("C",42,true,'N');
@@ -29,6 +26,10 @@ public class MainFile {
         mainTree[19] = new Person("T",15,false,'N');
         mainTree[20] = new Person("U",16,true,'M');
         
+        TreeReader tReader = new TreeReader();
+        tReader.loadTree("hello");
+        //tReader.setMain(mainTree);
+        //tReader.writeTree("Hello");
         //assigning relationships
         int p = 0;
         int last = 2;
@@ -52,14 +53,5 @@ public class MainFile {
         mainTree[8].addChild(mainTree[18]);
         mainTree[11].addChild(mainTree[19]);
         mainTree[11].addChild(mainTree[20]);
-       
-        //u can use this to test lineage/get ancestors of a person, not including the root unfortunately
-        Person test = mainTree[20].returnParent();
-        while (test != mainTree[0])
-        {
-            System.out.println(test.returnName());
-            test = test.returnParent();
-        }
-        
     }
 }
