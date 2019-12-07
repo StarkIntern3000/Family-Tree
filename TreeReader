@@ -33,4 +33,31 @@ public class TreeReader {
     public void writeTree(String s){
         filenameOut = s;
     }
+    
+    public boolean nameChecker(String name){
+        char firstCharacter = name.charAt(0);
+        int index = firstCharacter;
+        if(index < 97){
+            int j = 0;
+            index = index - 65;
+            while(j<=nameListSmall.get(index).size()){
+                if(name == nameListSmall.get(index).get(j)){
+                    return false;
+                }
+                j++;
+            }
+            nameListSmall.get(index).add(name);
+        }else if(index >= 97){
+            int k = 0;
+            index = index - 97;
+            while(k<=nameListBig.get(index).size()){
+                if(name == nameListBig.get(index).get(k)){
+                    return false;
+                }
+                k++;
+            }
+            nameListBig.get(index).add(name);
+        }
+        return true;
+    }
 }
