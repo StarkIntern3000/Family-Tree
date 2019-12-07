@@ -1,9 +1,75 @@
 public class MainFile {
     public static void main(String args[]){
         Person[] mainTree;
+        String type;
+        String name;
+        boolean state;
         TreeReader tReader = new TreeReader();
         mainTree = tReader.loadTree("bigger");
         tReader.writeTree("Hello");
-        
+        state = true;
+        while(state){
+            Scanner scanner = new Scanner(System. in); 
+            String input = scanner. nextLine();
+            String[] inputArray = input.split(" ");
+            
+            if(inputArray.length == 1){
+                switch(type){
+                    case "bye":
+                        state = false;
+                        break;
+                    case "count":
+                        //PRINT COUNT
+                        break;
+                }
+            }else if(inputArray.length == 2){
+                switch(type){
+                    case "age":
+                        name = inputArray[1];
+                        break;
+                    case "sex":
+                        name = inputArray[1];
+                        break;
+                    case "gender":
+                        name = inputArray[1];
+                        break;
+                    case "ancestors":
+                        name = inputArray[1];
+                        break;
+                    case "descendants":
+                        name = inputArray[1];
+                        break;
+                    case "load":
+                        name = inputArray[1];
+                        break;
+                    case "save":
+                        name = inputArray[1];
+                        break;
+                }
+            }else if(inputArray.length == 3){
+                switch(type){
+                    case "edit-name":
+                        name = inputArray[1];
+                        String newName = inputArray[2];
+                        break;
+                    case "edit-age":
+                        name = inputArray[1];
+                        String newAge = inputArray[2];
+                        break;
+                    case "edit-sex":
+                        name = inputArray[1];
+                        String newSex = inputArray[2];
+                        break;
+                    case "edit-gender":
+                        name = inputArray[1];
+                        String newGender = inputArray[2];
+                        break;
+                    case "relationship":
+                        name = inputArray[1];
+                        String nameCompared = inputArray[2];
+                        break;    
+                }
+            }   
+        }
     }
 }
