@@ -15,7 +15,6 @@ public class TreeReader {
     private int x, y;
     
     public Person[] loadTree(String s){
-        
         nameListSmall = new ArrayList<>();
         nameListBig = new ArrayList<>();
         while(i<52){  
@@ -24,60 +23,59 @@ public class TreeReader {
             nameListBig.add(inArray);
             i++;
         }
-        
-        filenameIn = s;
+        filenameIn = s + ".ft";
         Scanner scan = null;
         FileReader reader = null;
         try {
             reader = new FileReader(filenameIn);
-            System.out.println("File" + filenameIn + "found.");
-            
+            System.out.println("File " + filenameIn + " found.");
         } catch(FileNotFoundException F) {
-            System.out.println("File not found.");   
+            System.out.println("File \"" + filenameIn+ "\" not found.");   
         }
-        
-        if (reader != null) {
+        if (reader != null){
             scan = new Scanner(reader);
+            x = 0;
+            y = 0;
             while (scan.hasNextLine()) {
                 String inputScanned = scan.nextLine();
                 String [] lineRead = inputScanned.split(" ");
-                x = 0;
-                y = 0;
                 
                 if (lineRead[0].equals("family")) {
                     familyName = lineRead[1];
-                    System.out.println("FAMILY: " + familyName);
+                    //System.out.println("FAMILY: " + familyName);
                 }
                 
                 if (lineRead[0].equals("count"))  {
                     count = Integer.parseInt(lineRead[1]);
                     currentTree = new Person[count];
-                    System.out.println("COUNT: " + count);
+                    //System.out.println("COUNT: " + count);
                 }
                 
                 if (lineRead[0].equals("name")) {
                     name = lineRead[1];
-                    System.out.println("NAME: " + name);
+                    System.out.println("Name checker: " + nameChecker(name));
+                    
+                    //System.out.println("NAME: " + name);
                 }
                 
                 if (lineRead[0].equals("age")) {
                     age = Integer.parseInt(lineRead[1]);
-                    System.out.println("AGE: " + age);
+                    //System.out.println("AGE: " + age);
                 }
                 
                 
                 if (lineRead[0].equals("sex")) {
                     sex = Boolean.valueOf(lineRead[1]);
-                    System.out.println("SEX: " + sex);
+                    //System.out.println("SEX: " + sex);
                 }
                 
                 
                 if (lineRead[0].equals("gender")) {
                     gender = lineRead[1].charAt(0);
-                    System.out.println("GENDER: " + gender);
+                    //System.out.println("GENDER: " + gender);
                     currentTree[x] = (new Person(name,age,sex,gender));
+                    //System.out.println(currentTree[x].returnName());
                     x++;
-                    System.out.println(currentTree[0].returnName());
                 }
                 
                 if (lineRead[0].equals("links")) {
@@ -88,34 +86,65 @@ public class TreeReader {
                 
                 if (lineRead[0].equals("child")) {
                     linkArray[y] = lineRead[1] + " " + lineRead[2];
-                    System.out.println("RELATIONSHIP:" + linkArray[y]);
+                    System.out.println("RELATIONSHIP: " + linkArray[y]);
                     y++;
                 }
-                
             }
-            
-        }
-        
-        
+        }     
         
         return currentTree;
         
+    }
+    public void setMain(Person[] p){
+        currentTree = p;
+        /*linkCount = 3;
+        linkArray = new String[3];
+        linkArray[0] = "child A B";
+        linkArray[1] = "child B C";
+        linkArray[2] = "child C D";*/
         
     }
     
     public void writeTree(String s){
-        filenameOut = s;
+        filenameOut = s +".ft";
+        PrintWriter writer = null;
+        try{
+            writer = new PrintWriter(filenameOut);
+        } catch(FileNotFoundException f){
+            System.out.println("File "+ filenameOut + "not found.");
+        }
+        if (writer != null){
+            System.out.println("Now writing");
+            writer.println("family " + familyName);
+            writer.println("count " + currentTree.length);
+            for(int i = 0; i < currentTree.length; i++){
+                writer.println("name " + currentTree[i].returnName());
+                writer.println("age " + currentTree[i].returnAge());
+                writer.println("sex " + currentTree[i].returnSex());
+                writer.println("gender " + currentTree[i].returnGender());
+            }
+            writer.println("links " + linkCount);
+            for (String x : linkArray){
+                writer.println("child " + x);
+            }
+
+        }
+        writer.flush();
+        writer.close();
     }
     
-     public boolean nameChecker(String name){
+      public boolean nameChecker(String name){
         char firstCharacter = name.charAt(0);
+        
         int index = firstCharacter;
+        boolean state = true;
         if(index < 97){
             int j = 0;
             index = index - 65;
-            while(j<=nameListSmall.get(index).size()){
-                if(name == nameListSmall.get(index).get(j)){
-                    return false;
+            while(j<nameListSmall.get(index).size()){
+                
+                if(name.equals(nameListSmall.get(index).get(j))){
+                    state = false;
                 }
                 j++;
             }
@@ -123,16 +152,16 @@ public class TreeReader {
         }else if(index >= 97){
             int k = 0;
             index = index - 97;
-            while(k<=nameListBig.get(index).size()){
-                if(name == nameListBig.get(index).get(k)){
-                    return false;
+            while(k<nameListBig.get(index).size()){
+                
+                if(name.equals(nameListBig.get(index).get(k)) ){
+                    state = false;
                 }
                 k++;
             }
             nameListBig.get(index).add(name);
         }
-        return true;
+        return state;
     }
-    
     
 }
