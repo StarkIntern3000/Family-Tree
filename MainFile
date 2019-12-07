@@ -1,80 +1,195 @@
+import java.util.Scanner;
 public class MainFile {
     public static void main(String args[]){
-        Person[] mainTree;
+        Person[] mainTree = null;
         String type;
         String name;
         boolean state;
         TreeReader tReader = new TreeReader();
-        mainTree = tReader.loadTree("bigger");
-        tReader.writeTree("Hello");
+        RelationReader relationReader = null;
         state = true;
+        
         while(state){
             Scanner scanner = new Scanner(System. in); 
             String input = scanner. nextLine();
             String[] inputArray = input.split(" ");
+            
             try{
                 type = inputArray[0];
             }catch(Exception e){
                 continue;
             }
-            if(inputArray.length == 1){
+            
+            if(mainTree == null){
                 switch(type){
                     case "bye":
                         state = false;
-                        break;
-                    case "count":
-                        //PRINT COUNT
-                        break;
-                }
-            }else if(inputArray.length == 2){
-                switch(type){
-                    case "age":
-                        name = inputArray[1];
-                        break;
-                    case "sex":
-                        name = inputArray[1];
-                        break;
-                    case "gender":
-                        name = inputArray[1];
-                        break;
-                    case "ancestors":
-                        name = inputArray[1];
-                        break;
-                    case "descendants":
-                        name = inputArray[1];
+                        System.out.println("Goodbye.");
                         break;
                     case "load":
                         name = inputArray[1];
-                        break;
-                    case "save":
-                        name = inputArray[1];
+                        mainTree = tReader.loadTree(name);
+                        relationReader = new RelationReader(mainTree);
                         break;
                 }
-            }else if(inputArray.length == 3){
-                switch(type){
-                    case "edit-name":
-                        name = inputArray[1];
-                        String newName = inputArray[2];
-                        break;
-                    case "edit-age":
-                        name = inputArray[1];
-                        String newAge = inputArray[2];
-                        break;
-                    case "edit-sex":
-                        name = inputArray[1];
-                        String newSex = inputArray[2];
-                        break;
-                    case "edit-gender":
-                        name = inputArray[1];
-                        String newGender = inputArray[2];
-                        break;
-                    case "relationship":
-                        name = inputArray[1];
-                        String nameCompared = inputArray[2];
-                        break;    
+            }else{
+                if(inputArray.length == 1){
+                    switch(type){
+                        case "bye":
+                            state = false;
+                            System.out.println("Goodbye.");
+                            break;
+                        case "count":
+                            System.out.println(mainTree.length);
+                            break;
+                    }
+                }else if(inputArray.length == 2){
+                    switch(type){
+                        case "age":
+                            name = inputArray[1];
+                            
+                            int i = 0;
+                            while(i<mainTree.length){
+                                if(name.equals(mainTree[i].returnName())){
+                                    System.out.println(mainTree[i].returnAge());
+                                    break;
+                                }
+                                i++;
+                            }
+                            System.out.println("no such person " + name);
+                            break;
+                        case "sex":
+                            name = inputArray[1];
+                            int j = 0;
+                            while(j<mainTree.length){
+                                if(name.equals(mainTree[j].returnName())){
+                                    System.out.println(mainTree[j].returnSex());
+                                    break;
+                                }
+                                j++;
+                            }
+                            System.out.println("no such person " + name);
+                            break;
+                        case "gender":
+                            name = inputArray[1];
+                            int k = 0;
+                            while(k<mainTree.length){
+                                if(name.equals(mainTree[k].returnName())){
+                                    System.out.println(mainTree[k].returnGender());
+                                    break;
+                                }
+                                k++;
+                            }
+                            System.out.println("no such person " + name);
+                            break;
+                        case "ancestors":
+                            name = inputArray[1];
+                            break;
+                        case "descendants":
+                            name = inputArray[1];
+                            break;
+                        case "load":
+                            name = inputArray[1];
+                            mainTree = tReader.loadTree(name);
+                            break;
+                        case "save":
+                            name = inputArray[1];
+                            tReader.writeTree(name);
+                            break;
+                    }
+                }else if(inputArray.length == 3){
+                    switch(type){
+                        case "edit-name":
+                            name = inputArray[1];
+                            String newName = inputArray[2];
+                            int i = 0;
+                            boolean unique = tReader.nameChecker(newName);
+                            while(i<mainTree.length){
+                                if(name.equals(mainTree[i].returnName())&&unique){
+                                    mainTree[i].AttriEditor("name",newName);
+                                    break;
+                                }
+                                i++;
+                            }
+                            if(!(name.equals(mainTree[i].returnName()))&&unique){
+                                System.out.println("no such person " + name);
+                                break;
+                            }else if(!(name.equals(mainTree[i].returnName()))&&!unique){
+                                System.out.println("no such person " + name);
+                                System.out.println("Person " + newName + " already exists.");
+                                break;
+                            }else if(name.equals(mainTree[i].returnName())&&!(unique)){
+                                System.out.println("Person " + newName + " already exists.");
+                            }
+                            
+                            break;
+                        case "edit-age":
+                            name = inputArray[1];
+                            String newAge = inputArray[2];
+                            int j=0;
+                            while(j<mainTree.length){
+                                if(name.equals(mainTree[j].returnName())){
+                                    mainTree[j].AttriEditor("age",newAge);
+                                    break;
+                                }
+                                j++;
+                            }
+                            System.out.println("no such person " + name);
+                            break;
+                        case "edit-sex":
+                            name = inputArray[1];
+                            String newSex = inputArray[2];
+                            int k = 0;
+                            while(k<mainTree.length){
+                                if(name.equals(mainTree[k].returnName())){
+                                    mainTree[k].AttriEditor("name",newSex);
+                                    break;
+                                }
+                                k++;
+                            }
+                            System.out.println("no such person " + name);
+                            break;
+                        case "edit-gender":
+                            name = inputArray[1];
+                            String newGender = inputArray[2];
+                            int l = 0;
+                            while(l<mainTree.length){
+                                if(name.equals(mainTree[l].returnName())){
+                                    mainTree[l].AttriEditor("name",newGender);
+                                    break;
+                                }
+                                l++;
+                            }
+                            System.out.println("no such person " + name);
+                            break;
+                        case "relationship":
+                            name = inputArray[1];
+                            String nameCompared = inputArray[2];
+                            boolean nameAExist = false;
+                            boolean nameBExist = false;
+                            int a = 0;
+                            while(a<mainTree.length){
+                                if(name.equals(mainTree[a].returnName())){
+                                    nameAExist = true;
+                                    break;
+                                }
+                                a++;
+                            }
+                            int b = 0;
+                            while(b<mainTree.length){
+                                if(name.equals(mainTree[b].returnName())){
+                                    nameBExist = true;
+                                    break;
+                                }
+                                b++;
+                            }    
+                            if(nameAExist && nameBExist){
+                                relationReader.Relationship(mainTree[a],mainTree[b]);
+                            }
+                            break;    
+                    }
                 }
-            }   
+            }      
         }
     }
 }
-
