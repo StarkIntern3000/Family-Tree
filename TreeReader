@@ -5,8 +5,20 @@ import java.util.*;
 public class TreeReader {
     private String filenameIn, filenameOut;
     private Person[] currentTree;
+    private ArrayList<ArrayList<String>> nameListSmall, nameListBig;
+    private int i = 0;
+    
     
     public Person[] loadTree(String s){
+        nameListSmall = new ArrayList<>();
+        nameListBig = new ArrayList<>();
+        while(i<52){  
+            ArrayList<String> inArray = new ArrayList<>();
+            nameListSmall.add(inArray);
+            nameListBig.add(inArray);
+            i++;
+        }
+
         filenameIn = s;
         Scanner scan = null;
         FileReader reader = null;
