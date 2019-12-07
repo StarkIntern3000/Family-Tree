@@ -1,57 +1,9 @@
 public class MainFile {
     public static void main(String args[]){
         Person[] mainTree;
-        //im gonna manually build a tree muna using the sample in the project specs
-        mainTree = new Person[21];
-        RelationReader rReader = new RelationReader(mainTree);
-        mainTree[0] = new Person("A",70,true,'F');
-        mainTree[1] = new Person("B",50,true,'M');
-        mainTree[2] = new Person("C",42,true,'N');
-        mainTree[3] = new Person("D",31,false,'F');
-        mainTree[4] = new Person("E",32,false,'N');
-        mainTree[5] = new Person("F",33,true,'F');
-        mainTree[6] = new Person("G",34,false,'M');
-        mainTree[7] = new Person("H",21,false,'F');
-        mainTree[8] = new Person("I",22,false,'N');
-        mainTree[9] = new Person("J",23,true,'M');
-        mainTree[10] = new Person("K",24,false,'M');
-        mainTree[11] = new Person("L",25,false,'N');
-        mainTree[12] = new Person("M",26,true,'N');
-        mainTree[13] = new Person("N",27,false,'F');
-        mainTree[14] = new Person("O",28,true,'M');
-        mainTree[15] = new Person("P",11,false,'N');
-        mainTree[16] = new Person("Q",12,false,'F');
-        mainTree[17] = new Person("R",13,true,'F');
-        mainTree[18] = new Person("S",14,false,'F');
-        mainTree[19] = new Person("T",15,false,'N');
-        mainTree[20] = new Person("U",16,true,'M');
-        
         TreeReader tReader = new TreeReader();
-        //tReader.loadTree("hello");
-        //tReader.setMain(mainTree);
-        //tReader.writeTree("Hello");
-        //assigning relationships
-        int p = 0;
-        int last = 2;
-        for (int i = p+1; i <= last; i++){
-            mainTree[p].addChild(mainTree[i]);
-        }
-        int first = 0;
-        for (int j = 0; j < 3; j++){
-            if (j!= 0){
-                first = (j*2)-1;
-            }
-            for (int i = first; i <= (first*2);i+=1){
-                mainTree[i].addChild(mainTree[(2*i)+1]);
-                mainTree[i].addChild(mainTree[(2*i)+2]);
-            }
-            
-        }
-        mainTree[7].addChild(mainTree[15]);
-        mainTree[7].addChild(mainTree[16]);
-        mainTree[8].addChild(mainTree[17]);
-        mainTree[8].addChild(mainTree[18]);
-        mainTree[11].addChild(mainTree[19]);
-        mainTree[11].addChild(mainTree[20]);
+        mainTree = tReader.loadTree("bigger");
+        tReader.writeTree("Hello");
+        
     }
 }
