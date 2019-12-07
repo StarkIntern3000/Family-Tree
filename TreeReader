@@ -1,13 +1,36 @@
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.*;
 
 public class TreeReader {
     private String filenameIn, filenameOut;
     private Person[] currentTree;
     
     public Person[] loadTree(String s){
+        filenameIn = s;
+        Scanner scan = null;
+        FileReader reader = null;
+        try {
+            reader = new FileReader("fileNameIn" + ".ft");
+            System.out.println("File found.");
+            scan = new Scanner(reader);
+        } catch(FileNotFoundException F) {
+            System.out.println("File not found.");   
+        }
+        
+        while (scan.hasNextLine()) {
+            String inputScanned = scan.nextLine();
+            String [] lineRead = inputScanned.split(" ");
+            System.out.println("FAMILY: " + lineRead[0]);
+        }
+        
+        
         return currentTree;
+        
+        
     }
     
     public void writeTree(String s){
-        
+        filenameOut = s;
     }
 }
