@@ -1,15 +1,21 @@
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.util.*;
 
 public class TreeReader {
     private String filenameIn, filenameOut;
     private Person[] currentTree;
+    private String[] linkArray;
+    private String familyName, name;
+    private int count,linkCount;
+    private int age;
+    private boolean sex;
+    private char gender;
     private ArrayList<ArrayList<String>> nameListSmall, nameListBig;
     private int i = 0;
-    
+    private int x;
     
     public Person[] loadTree(String s){
+        
         nameListSmall = new ArrayList<>();
         nameListBig = new ArrayList<>();
         while(i<52){  
@@ -18,23 +24,70 @@ public class TreeReader {
             nameListBig.add(inArray);
             i++;
         }
-
+        
         filenameIn = s;
         Scanner scan = null;
         FileReader reader = null;
         try {
-            reader = new FileReader(filenameIn + ".ft");
-            System.out.println("File found.");
-            scan = new Scanner(reader);
+            reader = new FileReader(filenameIn);
+            System.out.println("File" + filenameIn + "found.");
+            
         } catch(FileNotFoundException F) {
             System.out.println("File not found.");   
         }
         
-        while (scan.hasNextLine()) {
-            String inputScanned = scan.nextLine();
-            String [] lineRead = inputScanned.split(" ");
-            System.out.println("FAMILY: " + lineRead[0]);
+        if (reader != null) {
+            scan = new Scanner(reader);
+            while (scan.hasNextLine()) {
+                String inputScanned = scan.nextLine();
+                String [] lineRead = inputScanned.split(" ");
+                x = 0;
+                
+                if (lineRead[0].equals("family")) {
+                    familyName = lineRead[1];
+                    System.out.println("FAMILY: " + familyName);
+                }
+                
+                if (lineRead[0].equals("count"))  {
+                    count = Integer.parseInt(lineRead[1]);
+                    currentTree = new Person[count];
+                    System.out.println("COUNT: " + count);
+                }
+                
+                if (lineRead[0].equals("name")) {
+                    name = lineRead[1];
+                    System.out.println("NAME: " + name);
+                }
+                
+                if (lineRead[0].equals("age")) {
+                    age = Integer.parseInt(lineRead[i+1]);
+                    System.out.println("AGE: " + age);
+                }
+                
+                
+                if (lineRead[0].equals("sex")) {
+                    sex = Boolean.valueOf(lineRead[1]);
+                    System.out.println("SEX: " + sex);
+                }
+                
+                
+                if (lineRead[0].equals("gender")) {
+                    gender = lineRead[1].charAt(0);
+                    System.out.println("GENDER: " + gender);
+                    currentTree[x] = (new Person(name,age,sex,gender));
+                    x++;
+                }
+                
+                if (lineRead[0].equals("links")) {
+                    linkCount = Integer.parseInt(lineRead[1]);
+                    linkArray = new String[linkCount];
+                    System.out.println("LINKS: " + linkCount);
+                }
+                
+            }
+            
         }
+        
         
         
         return currentTree;
@@ -46,7 +99,7 @@ public class TreeReader {
         filenameOut = s;
     }
     
-    public boolean nameChecker(String name){
+     public boolean nameChecker(String name){
         char firstCharacter = name.charAt(0);
         int index = firstCharacter;
         if(index < 97){
@@ -72,4 +125,6 @@ public class TreeReader {
         }
         return true;
     }
+    
+    
 }
