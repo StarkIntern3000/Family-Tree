@@ -11,7 +11,7 @@ public class TreeReader {
         Scanner scan = null;
         FileReader reader = null;
         try {
-            reader = new FileReader("fileNameIn" + ".ft");
+            reader = new FileReader(fileNameIn + ".ft");
             System.out.println("File found.");
             scan = new Scanner(reader);
         } catch(FileNotFoundException F) {
