@@ -1,0 +1,13 @@
+
+public class TreeReader {
+    private String filenameIn, filenameOut;
+    private Person[] currentTree;
+    
+    public Person[] loadTree(String s){
+        return currentTree;
+    }
+    
+    public void writeTree(String s){
+        
+    }
+}
