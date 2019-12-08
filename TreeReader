@@ -196,4 +196,21 @@ public class TreeReader {
          return found;
      }
     
+    public void ancestors(Person p){
+        String ancestors = "";
+        while (p.returnDepth(0) >= 1){
+            String parent = p.returnParent().returnName();
+            ancestors += " " + parent;
+            p = p.returnParent();
+            System.out.println("added " + parent);
+        }
+        String ancestorsUnsorted[] = ancestors.split(" ");
+        //sort ancestorList[]
+        System.out.println("ancestors: " + ancestors);
+    }
+    
+    public String[] sort(String[] unsorted){
+        String[] sorted = new String[unsorted.length];
+        return sorted;
+    }
 }
