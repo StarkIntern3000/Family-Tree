@@ -1,134 +1,106 @@
-import java.lang.Math.*;
+/* this is for all the algorithms under Relationship */
 
-public class RelationReader /*implements RelationVariable*/{
-    private Person[] mainTree;
-    private int dA = 0, dB = 0;
-    private int nearest, furthest;
-    private int degree, removal;
-    private RelationVariable deg, rem, terminology, greatness;
-    private Person lowestCA;
-    public RelationReader(Person[] m){
-        mainTree = m;
-        deg = new RelationVariable();
-        rem = new RelationVariable();
-        terminology = new RelationVariable();
-        greatness = new RelationVariable();
-    }
-    public Person LCA(Person pa, Person pb){
-        Person A = pa, B = pb;
-        int depthA = A.returnDepth(0), depthB = B.returnDepth(0);
-        /*
-            starts by getting the two compared people to the same depth - aligns them on the same generation by going to the lower depth
-            also increases the distance of the deeper person accordingly
-        */
-        while (depthA != depthB){
-            if (depthA > depthB){
-                A = A.returnParent();
-                dA++;
-                depthA = A.returnDepth(0);
-            }
-            else if (depthA < depthB){
-                B = B.returnParent();
-                dB++;
-                depthB = B.returnDepth(0);
-            }
-        }
+public class RelationVariable {
+    
+    public RelationVariable(){
         
-        /*
-            makes sure that LCA is at least 2 generations away
-        */
-                //this is andie: for some reason this part of the code was 
-                //making the lca one generation higher than it should be so i removed it
-        
-//        while (dA < 1 || dB < 1){
-//            A = A.returnParent();
-//            B = B.returnParent();
-//            dA++;
-//            dB++;
-//        }
-
-
-        /*
-            compares each person's respective ancestor of that generation until they find the same person
-        */
-        while (A != B){
-            A = A.returnParent();
-            B = B.returnParent();
-            dA++;
-            dB++;
-        }
-        
-        lowestCA = A;
-        return lowestCA;
     }
     
-    
-    public String Relationship(Person pa, Person pb) {
-//        dA = dA-1;
-//        dB = dB-1;
-
-        //assigning nearest and furthest
-        LCA(pa,pb);
-        if (dA>dB) {
-            furthest = dA;
-            nearest = dB;
+    public String Ordinal(int d) {
+        if (d == 1) {
+            return "1st ";
+        }
+        else if (d == 2) {
+            return "2nd ";
+        }
+        else if (d == 3) {
+            return "3rd ";
         }
         else {
-            nearest = dA;
-            furthest = dB;
+            return d + "th ";
         }
-        
-        //determining cousins
-        if (nearest >= 2) {
-            degree = nearest-1;
-            removal = java.lang.Math.abs(dA-dB);
-            if (removal == 0) {
-                return deg.Ordinal(degree) + "cousin";
-            }
-            else {
-                return deg.Ordinal(degree) + "cousin " + rem.Times(removal) + "removed";
-            }
+    }
+    public String Times(int r) {
+        if (r == 1) {
+            return "once ";
         }
-        
-        else if (nearest == 1) {
-            //determining siblings
-            if (furthest == 1) {
-                if (pb.returnGender() == 'N') {
-                    return "sibling";
+        else if (r == 2) {
+            return "twice ";
+        }
+        else if (r == 3) {
+            return "thrice ";
+        }
+        else {
+            return Integer.toString(r) + " times ";
+        }
+    }
+    public String Term(String s,int d1,int d2,char gender) {
+        if (s.equals("nibling")) {
+            if (d1<d2) {
+                if (gender == 'N') {
+                    return "nibling";
                 }
-                else if (pb.returnGender() == 'F') {
-                    return "sister";
+                else if (gender == 'F') {
+                    return "niece";
                 }
                 else {
-                    return "brother";
+                    return "nephew";
                 }
             }
-            //determining niblings and auncles
-            else if (furthest == 2) {
-                return terminology.Term("nibling",dA,dB,pb.returnGender());
-            }
             else {
-                return greatness.Great(nearest,furthest) + "grand" + terminology.Term("nibling",dA,dB,pb.returnGender());
+                if (gender == 'N') {
+                    return "auncle";    //still debating on the term
+                }
+                else if (gender == 'F') {
+                    return "aunt";
+                }
+                else {
+                    return "uncle";
+                }
             }
         }
-        
+        else if (s.equals("child")){
+            if (d1<d2) {
+                if (gender == 'N') {
+                    return "child";
+                }
+                else if (gender == 'F') {
+                    return "daughter";
+                }
+                else {
+                    return "son";
+                }
+            }
+            else {
+                if (gender == 'N') {
+                    return "parent";    
+                }
+                else if (gender == 'F') {
+                    return "mother";
+                }
+                else {
+                    return "father";
+                }
+            }
+        }
         else {
-            //determining parent or child
-            if (furthest == 1) {
-                return terminology.Term("child",dA,dB,pb.returnGender());
-            }
-            else {
-                return greatness.Great(nearest,furthest) + "grand" + terminology.Term("child",dA,dB,pb.returnGender());
-            }
+            return "Error";
         }
     }
-    
-    
-    public int getDA() {
-        return dA;
+    public String Great(int n, int f) {
+        String great = "";
+        if (n==0) {
+            while (f>2) {
+                great = great + "great ";
+                f = f-1;
+            }
+        }
+        else if (n==1) {
+            while (f>3) {
+                great = great + "great ";
+                f = f-1;
+            }
+        }
+        return great;
     }
-    public int getDB() {
-        return dB;
-    }
-    
 }
