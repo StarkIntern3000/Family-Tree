@@ -91,7 +91,8 @@ public class TreeReader {
                 }
             }
              
-        }     
+        }
+        boolean cycle = false;
         if (currentTree.length > 0){
             //System.out.println(currentTree.length);
             for (int m=0;m<linkArray.length;m++) {
@@ -106,10 +107,19 @@ public class TreeReader {
                 
                 //System.out.println(p1);
                 //System.out.println(p2.returnName());
-
-                p1.addChild(p2);
+                if (p2 == currentTree[0]){
+                    cycle = true;
+                    System.out.println("Error: cannot set root node of family tree as a child");
+                }
+                else{
+                    cycle = p1.addChild(p2);
+                }
                 //System.out.println(p2.returnParent().returnName());
             }
+        }
+        boolean disconnected = orphanCheck();
+        if (disconnected || cycle){
+            currentTree = null;
         }
         return currentTree;
         
@@ -196,4 +206,36 @@ public class TreeReader {
          return found;
      }
     
+    public void ancestors(Person p){
+        String ancestors = "";
+        while (p.returnDepth(0) >= 1){
+            String parent = p.returnParent().returnName();
+            ancestors += " " + parent;
+            p = p.returnParent();
+            System.out.println("added " + parent);
+        }
+        String ancestorsUnsorted[] = ancestors.split(" ");
+        //sort ancestorList[]
+        System.out.println("ancestors: " + ancestors);
+    }
+    
+    public String[] sort(String[] unsorted){
+        String[] sorted = new String[unsorted.length];
+        return sorted;
+    }
+    
+    public boolean orphanCheck(){
+        boolean disc = false;
+        int orphans = 0;
+        for (Person x : currentTree){
+            if (x.returnParent() == null){
+                orphans++;
+            }
+        }
+        if (orphans > 1){
+            disc = true;
+            System.out.println("Error: family tree is disconnected; check for orphans");
+        }
+        return disc;
+    }
 }
