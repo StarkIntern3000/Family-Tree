@@ -13,6 +13,7 @@ public class MainFile {
         RelationReader relationReader = null;
         state = true;
         while(state){
+            boolean checker = false;
             Scanner scanner = new Scanner(System. in); 
             String input = scanner. nextLine();
             String[] inputArray = input.split(" ");
@@ -34,6 +35,8 @@ public class MainFile {
                         mainTree = tReader.loadTree(name);
                         relationReader = new RelationReader(mainTree);
                         break;
+                    default: 
+                        System.out.println("unrecognized keyword " + type);
                 }
             }else{
                 if(inputArray.length == 1){
@@ -45,45 +48,43 @@ public class MainFile {
                         case "count":
                             System.out.println(mainTree.length);
                             break;
+                        default: 
+                            System.out.println("unrecognized keyword " + type);
                     }
                 }else if(inputArray.length == 2){
                     switch(type){
                         case "age":
                             name = inputArray[1];
                             
-                            int i = 0;
-                            while(i<mainTree.length){
-                                if(name.equals(mainTree[i].returnName())){
-                                    System.out.println(mainTree[i].returnAge());
-                                    break;
-                                }
-                                i++;
+                            
+                            if(tReader.personSearch(mainTree, name) != null){
+                                System.out.println(tReader.personSearch(mainTree, name).returnAge());
+                                checker = true;
                             }
-                            System.out.println("no such person " + name);
+                            if(!checker){
+                                System.out.println("no such person " + name);
+                            }
                             break;
+                            
                         case "sex":
                             name = inputArray[1];
-                            int j = 0;
-                            while(j<mainTree.length){
-                                if(name.equals(mainTree[j].returnName())){
-                                    System.out.println(mainTree[j].returnSex());
-                                    break;
-                                }
-                                j++;
+                            if(tReader.personSearch(mainTree, name) != null){
+                                System.out.println(tReader.personSearch(mainTree, name).returnSex());
+                                checker = true;
                             }
-                            System.out.println("no such person " + name);
+                            if(!checker){
+                                System.out.println("no such person " + name);
+                            }
                             break;
                         case "gender":
                             name = inputArray[1];
-                            int k = 0;
-                            while(k<mainTree.length){
-                                if(name.equals(mainTree[k].returnName())){
-                                    System.out.println(mainTree[k].returnGender());
-                                    break;
-                                }
-                                k++;
+                            if(tReader.personSearch(mainTree, name) != null){
+                                System.out.println(tReader.personSearch(mainTree, name).returnGender());
+                                checker = true;
                             }
-                            System.out.println("no such person " + name);
+                            if(!checker){
+                                System.out.println("no such person " + name);
+                            }
                             break;
                         case "ancestors":
                             name = inputArray[1];
@@ -99,97 +100,101 @@ public class MainFile {
                             name = inputArray[1];
                             tReader.writeTree(name);
                             break;
+                        default: 
+                            System.out.println("unrecognized keyword " + type);
                     }
                 }else if(inputArray.length == 3){
                     switch(type){
                         case "edit-name":
                             name = inputArray[1];
                             String newName = inputArray[2];
-                            int i = 0;
+                            
                             boolean unique = tReader.nameChecker(newName);
-                            while(i<mainTree.length){
-                                if(name.equals(mainTree[i].returnName())&&unique){
-                                    mainTree[i].AttriEditor("name",newName);
+                            if(tReader.personSearch(mainTree, name) != null && unique){
+                                checker = true;
+                                tReader.personSearch(mainTree, name).AttriEditor("name",newName);
                                     break;
-                                }
-                                i++;
                             }
-                            if(!(name.equals(mainTree[i].returnName()))&&unique){
+                            
+                            if(!(tReader.personSearch(mainTree, name) != null)&&unique){
                                 System.out.println("no such person " + name);
                                 break;
-                            }else if(!(name.equals(mainTree[i].returnName()))&&!unique){
+                            }else if(!(tReader.personSearch(mainTree, name) != null)&&!unique){
                                 System.out.println("no such person " + name);
                                 System.out.println("Person " + newName + " already exists.");
                                 break;
-                            }else if(name.equals(mainTree[i].returnName())&&!(unique)){
+                            }else if(tReader.personSearch(mainTree, name) != null && !(unique)){
                                 System.out.println("Person " + newName + " already exists.");
+                                break;
                             }
                             
                             break;
                         case "edit-age":
                             name = inputArray[1];
                             String newAge = inputArray[2];
-                            int j=0;
-                            while(j<mainTree.length){
-                                if(name.equals(mainTree[j].returnName())){
-                                    mainTree[j].AttriEditor("age",newAge);
+                            
+                            if(tReader.personSearch(mainTree, name) != null){
+                                checker = true;
+                                tReader.personSearch(mainTree, name).AttriEditor("age",newAge);
                                     break;
-                                }
-                                j++;
                             }
-                            System.out.println("no such person " + name);
+                            
+                            if(!checker){
+                                System.out.println("no such person " + name);
+                            }
                             break;
                         case "edit-sex":
                             name = inputArray[1];
                             String newSex = inputArray[2];
-                            int k = 0;
-                            while(k<mainTree.length){
-                                if(name.equals(mainTree[k].returnName())){
-                                    mainTree[k].AttriEditor("name",newSex);
+                            
+                            if(tReader.personSearch(mainTree, name) != null){
+                                checker = true;
+                                tReader.personSearch(mainTree, name).AttriEditor("name",newSex);
                                     break;
-                                }
-                                k++;
                             }
-                            System.out.println("no such person " + name);
+                            if(!checker){
+                                System.out.println("no such person " + name);
+                            }
                             break;
                         case "edit-gender":
                             name = inputArray[1];
                             String newGender = inputArray[2];
-                            int l = 0;
-                            while(l<mainTree.length){
-                                if(name.equals(mainTree[l].returnName())){
-                                    mainTree[l].AttriEditor("name",newGender);
+                            
+                            if(tReader.personSearch(mainTree, name) != null){
+                                checker = true;
+                                tReader.personSearch(mainTree, name).AttriEditor("name",newGender);
                                     break;
-                                }
-                                l++;
                             }
-                            System.out.println("no such person " + name);
+                            if(!checker){
+                                System.out.println("no such person " + name);
+                            }
                             break;
                         case "relationship":
                             name = inputArray[1];
                             String nameCompared = inputArray[2];
                             boolean nameAExist = false;
                             boolean nameBExist = false;
-                            int a = 0;
-                            while(a<mainTree.length){
-                                if(name.equals(mainTree[a].returnName())){
-                                    nameAExist = true;
-                                    break;
-                                }
-                                a++;
+                            if(tReader.personSearch(mainTree, name)!=null){
+                                nameAExist = true;
                             }
-                            int b = 0;
-                            while(b<mainTree.length){
-                                if(name.equals(mainTree[b].returnName())){
-                                    nameBExist = true;
-                                    break;
-                                }
-                                b++;
-                            }    
+                            if(tReader.personSearch(mainTree, nameCompared) != null){
+                                nameBExist = true;
+                            }
+                                
                             if(nameAExist && nameBExist){
-                                relationReader.Relationship(mainTree[a],mainTree[b]);
+                                relationReader.Relationship(tReader.personSearch(mainTree, name),tReader.personSearch(mainTree, nameCompared));
+                            }else if(!nameAExist && nameBExist){
+                                System.out.println("no such person " + name);
+                            }else if(nameAExist && !nameBExist){
+                                System.out.println("no such person " + nameCompared);
+                            }else if(!nameAExist && !nameBExist){
+                                System.out.println("no such person " + name);
+                                System.out.println("no such person " + nameCompared);
                             }
-                            break;    
+                            
+                            break;
+                        default: 
+                            System.out.println("unrecognized keyword " + type);
                     }
                 }
             }      
