@@ -6,6 +6,7 @@ public class RelationReader /*implements RelationVariable*/{
     private int nearest, furthest;
     private int degree, removal;
     private RelationVariable deg, rem, terminology, greatness;
+    private Person lowestCA;
     public RelationReader(Person[] m){
         mainTree = m;
         deg = new RelationVariable();
@@ -13,7 +14,7 @@ public class RelationReader /*implements RelationVariable*/{
         terminology = new RelationVariable();
         greatness = new RelationVariable();
     }
-    public void LCA(Person pa, Person pb){
+    public Person LCA(Person pa, Person pb){
         Person A = pa, B = pb;
         int depthA = A.returnDepth(0), depthB = B.returnDepth(0);
         /*
@@ -34,6 +35,20 @@ public class RelationReader /*implements RelationVariable*/{
         }
         
         /*
+            makes sure that LCA is at least 2 generations away
+        */
+                //this is andie: for some reason this part of the code was 
+                //making the lca one generation higher than it should be so i removed it
+        
+//        while (dA < 1 || dB < 1){
+//            A = A.returnParent();
+//            B = B.returnParent();
+//            dA++;
+//            dB++;
+//        }
+
+
+        /*
             compares each person's respective ancestor of that generation until they find the same person
         */
         while (A != B){
@@ -42,6 +57,9 @@ public class RelationReader /*implements RelationVariable*/{
             dA++;
             dB++;
         }
+        
+        lowestCA = A;
+        return lowestCA;
     }
     
     
@@ -50,6 +68,7 @@ public class RelationReader /*implements RelationVariable*/{
 //        dB = dB-1;
 
         //assigning nearest and furthest
+        LCA(pa,pb);
         if (dA>dB) {
             furthest = dA;
             nearest = dB;
@@ -96,7 +115,7 @@ public class RelationReader /*implements RelationVariable*/{
         else {
             //determining parent or child
             if (furthest == 1) {
-                return terminology.Term("child",dA,dB,pa.returnGender());
+                return terminology.Term("child",dA,dB,pb.returnGender());
             }
             else {
                 return greatness.Great(nearest,furthest) + "grand" + terminology.Term("child",dA,dB,pb.returnGender());
