@@ -1,14 +1,17 @@
-import java.util.Scanner;
+
+import java.util.*;
+
 public class MainFile {
     public static void main(String args[]){
         Person[] mainTree = null;
+        TreeReader tReader = new TreeReader();
+        
         String type;
         String name;
         boolean state;
-        TreeReader tReader = new TreeReader();
+        //TreeReader tReader = new TreeReader();
         RelationReader relationReader = null;
         state = true;
-        
         while(state){
             Scanner scanner = new Scanner(System. in); 
             String input = scanner. nextLine();
@@ -24,7 +27,7 @@ public class MainFile {
                 switch(type){
                     case "bye":
                         state = false;
-                        System.out.println("Goodbye.");
+                        System.out.println("Goodbye!");
                         break;
                     case "load":
                         name = inputArray[1];
