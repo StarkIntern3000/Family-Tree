@@ -43,7 +43,7 @@ public class MainFile {
                     switch(type){
                         case "bye":
                             state = false;
-                            System.out.println("Goodbye.");
+                            System.out.println("Goodbye!");
                             break;
                         case "count":
                             System.out.println(mainTree.length);
@@ -149,7 +149,7 @@ public class MainFile {
                             
                             if(tReader.personSearch(mainTree, name) != null){
                                 checker = true;
-                                tReader.personSearch(mainTree, name).AttriEditor("name",newSex);
+                                tReader.personSearch(mainTree, name).AttriEditor("sex",newSex);
                                     break;
                             }
                             if(!checker){
@@ -162,7 +162,7 @@ public class MainFile {
                             
                             if(tReader.personSearch(mainTree, name) != null){
                                 checker = true;
-                                tReader.personSearch(mainTree, name).AttriEditor("name",newGender);
+                                tReader.personSearch(mainTree, name).AttriEditor("gender",newGender);
                                     break;
                             }
                             if(!checker){
@@ -182,7 +182,7 @@ public class MainFile {
                             }
                                 
                             if(nameAExist && nameBExist){
-                                relationReader.Relationship(tReader.personSearch(mainTree, name),tReader.personSearch(mainTree, nameCompared));
+                                System.out.println(relationReader.Relationship(tReader.personSearch(mainTree, name),tReader.personSearch(mainTree, nameCompared)));
                             }else if(!nameAExist && nameBExist){
                                 System.out.println("no such person " + name);
                             }else if(nameAExist && !nameBExist){
