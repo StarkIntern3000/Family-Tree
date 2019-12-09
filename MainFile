@@ -146,6 +146,17 @@ public class MainFile {
                         case "edit-sex":
                             name = inputArray[1];
                             String newSex = inputArray[2];
+                            boolean nS;
+                            if (newSex.equals("male")){
+                                nS = true;
+                            }
+                            else if (newSex.equals("female")){
+                                nS = false;
+                            }
+                            else{
+                                System.out.println("unrecognized keyword "+ type);
+                                break;
+                            }
                             
                             if(tReader.personSearch(mainTree, name) != null){
                                 checker = true;
