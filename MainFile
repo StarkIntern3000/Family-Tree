@@ -134,19 +134,31 @@ public class MainFile {
                             break;
                         case "ancestors":
                             name = inputArray[1];
-                            System.out.println(tReader.ancestors(tReader.personSearch(mainTree, name)));
+                            if(tReader.personSearch(mainTree, name) != null){
+                                System.out.println(tReader.ancestors(tReader.personSearch(mainTree, name)));
+                                checker = true;
+                            }
+                            if(!checker){
+                                System.out.println("Error: no such person " + name);
+                            }
                             break;
                         case "descendants":
                             name = inputArray[1];
-                            boolean hasChildren = false;
-                            if (tReader.personSearch(mainTree,name).returnLeft() != null) {
-                                hasChildren = true;
+                            if(tReader.personSearch(mainTree, name) != null){
+                                boolean hasChildren = false;
+                                if (tReader.personSearch(mainTree,name).returnLeft() != null) {
+                                    hasChildren = true;
+                                }
+                                if (hasChildren == false) {
+                                    System.out.println("No descendants");
+                                }
+                                else {
+                                    System.out.println(tReader.descendants(tReader.personSearch(mainTree,name)));
+                                }
+                                checker = true;
                             }
-                            if (hasChildren == false) {
-                                System.out.println("No descendants");
-                            }
-                            else {
-                                System.out.println(tReader.descendants(tReader.personSearch(mainTree,name)));
+                            if(!checker){
+                                System.out.println("Error: no such person " + name);
                             }
 
                             break;
@@ -326,4 +338,3 @@ public class MainFile {
             }      
         }
     }
-}
