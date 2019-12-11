@@ -361,4 +361,7 @@ public class MainFile {
                 else if(inputArray.length > 3){
                     System.out.println("Error: too many inputs from user");
                 }
-            }      
+            }
+        }
+    }
+}
