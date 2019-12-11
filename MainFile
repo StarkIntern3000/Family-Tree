@@ -153,7 +153,23 @@ public class MainFile {
                                     System.out.println("No descendants");
                                 }
                                 else {
-                                    System.out.println(tReader.descendants(tReader.personSearch(mainTree,name)));
+                                    String desc = tReader.descendants(tReader.personSearch(mainTree,name));
+                                    String[] d = desc.split(" ");
+                                    String descendants = "";
+                                    boolean first = true;
+                                    for (int i=1;i<d.length;i++) {
+                                        if (!d[i].equals(name)) {
+                                            if (first){
+                                                descendants = d[i];
+                                                first = false;
+                                            }
+                                            else{
+                                                descendants = descendants + " " + d[i];
+                                            }
+                                        }
+                                    }
+                                    System.out.println(descendants);
+                                    
                                 }
                                 checker = true;
                             }
