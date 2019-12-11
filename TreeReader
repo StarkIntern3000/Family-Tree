@@ -247,10 +247,9 @@ public class TreeReader {
             }
             
             Collections.sort(ancestorsList);
-            boolean first = true;
-            for(String x : ancestorsList){
-                if (first) {ancestors = x; first = false;}
-                else {ancestors += " " + x;}
+            ancestors = ancestorsList.get(0);
+            for(int i = 1; i < ancestorsList.size(); i++){
+                ancestors += " " + ancestorsList.get(i);
             }         
         }        
         return ancestors;
