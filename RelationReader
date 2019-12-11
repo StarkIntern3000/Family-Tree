@@ -119,7 +119,6 @@ public class RelationReader{
         
         else {
             //determining parent or child
-            System.out.println("dA: " + dA + " dB: " + dB);
             if (furthest == 1) {
                 return terminology.Term("child",dA,dB,pb.returnGender());
             }
