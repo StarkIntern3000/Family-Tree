@@ -262,21 +262,21 @@ public class MainFile {
                         case "edit-sex":
                             name = inputArray[1];
                             String newSex = inputArray[2];
-                            boolean nS;
+                            String nS;
                             if (newSex.equals("male")){
-                                nS = true;
+                                nS = "true";
                             }
                             else if (newSex.equals("female")){
-                                nS = false;
+                                nS = "false";
                             }
                             else{
-                                System.out.println("Error: unrecognized keyword "+ type);
+                                System.out.println("Error: invalid input");
                                 break;
                             }
                             
                             if(tReader.personSearch(mainTree, name) != null){
                                 checker = true;
-                                tReader.personSearch(mainTree, name).AttriEditor("sex",newSex);
+                                tReader.personSearch(mainTree, name).AttriEditor("sex",nS);
                                     break;
                             }
                             if(!checker){
@@ -362,7 +362,3 @@ public class MainFile {
                     System.out.println("Error: too many inputs from user");
                 }
             }      
-        }
-    }
-}
-
