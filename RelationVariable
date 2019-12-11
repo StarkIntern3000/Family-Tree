@@ -1,5 +1,8 @@
-/* this is for all the algorithms under Relationship */
-
+/**
+ * 
+ * The RelationVariable class processes data using different methods and returns a String equivalent.
+ * RelationVariable objects are used in implementing the Relation method in RelationReader.
+ */
 public class RelationVariable {
     
     public RelationVariable(){
@@ -68,7 +71,7 @@ public class RelationVariable {
             }
             else {
                 if (gender == 'N') {
-                    return "auncle";    //still debating on the term
+                    return "pibling/auncle";   //gender neutral term for aunt/uncle
                 }
                 else if (gender == 'F') {
                     return "aunt";
