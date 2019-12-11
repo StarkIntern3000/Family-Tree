@@ -1,12 +1,21 @@
 import java.lang.Math.*;
-
-public class RelationReader /*implements RelationVariable*/{
+/**
+ * 
+ * The RelationReader class reads an array of Person objects which serves as a binary tree.
+ * It contains methods that determine relationships within the tree of Person objects.
+ */
+public class RelationReader{
     private Person[] mainTree;
     private int dA = 0, dB = 0;
     private int nearest, furthest;
     private int degree, removal;
     private RelationVariable deg, rem, terminology, greatness;
     private Person lowestCA;
+    
+    /**
+     * 
+     * @param m is an array of Person objects that acts as a tree that the RelationReader reads and bases all relationships on
+     */
     public RelationReader(Person[] m){
         mainTree = m;
         deg = new RelationVariable();
@@ -17,7 +26,7 @@ public class RelationReader /*implements RelationVariable*/{
     /**
      * 
      * @param pa is the first Person object 
-    * @param pb is the second Person object
+     * @param pb is the second Person object
      * @return the Person who is the lowest common ancestor of pa and pb
      */
     public Person LCA(Person pa, Person pb){
