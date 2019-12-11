@@ -164,7 +164,6 @@ public class Person {
             returnS = "female";
         }
         return returnS;
-        return sex;
     }
     
     /**
