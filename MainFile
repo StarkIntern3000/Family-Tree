@@ -16,7 +16,8 @@ public class MainFile {
         //While the program is still running
         while(state){
             boolean checker = false;
-            Scanner scanner = new Scanner(System. in); 
+            Scanner scanner = new Scanner(System. in);
+            System.out.print("> ");
             String input = scanner. nextLine();
             String[] inputArray = input.split(" ");
             
