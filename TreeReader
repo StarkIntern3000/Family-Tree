@@ -255,6 +255,34 @@ public class TreeReader {
         }        
         return ancestors;
     }
+    /**
+     *
+     * @param p is a Person object whose list of descendants will be determined
+     * @return a String containing the sorted list of the names of the descendants of Person p separated by a " "
+     */
+    public String descendants(Person p) {
+        String descendants = "";
+        ArrayList<String> descendantsList = new ArrayList();
+        if (p.returnChildren() == 1) {
+            descendantsList.add(p.returnName()) ;
+            descendantsList.add(descendants(p.returnLeft()));
+        }
+        else if (p.returnChildren() == 2) {
+            descendantsList.add(p.returnName());
+            descendantsList.add(descendants(p.returnLeft()));
+            descendantsList.add(descendants(p.returnRight()));
+        }
+        else {
+            descendantsList.add(p.returnName());
+        }
+        Collections.sort(descendantsList);
+        descendants = descendantsList.get(0);
+        
+        for (int i=1;i<descendantsList.size();i++) {
+            descendants = descendants + " " + descendantsList.get(i);
+        }
+        return descendants;
+    }
     
     /**
      * 
