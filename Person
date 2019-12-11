@@ -153,9 +153,9 @@ public class Person {
     
     /**
      * 
-     * @return a boolean that determines the sex of the Person
+     * @return a string that corresponds to the sex of the Person
      */
-    public boolean returnSex(){
+    public String returnSex(){
         String returnS;
         if (sex){
             returnS = "male";
