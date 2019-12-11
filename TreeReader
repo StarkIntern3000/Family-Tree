@@ -14,6 +14,11 @@ public class TreeReader {
     private int i = 0;
     private int x, y;
     
+    /**
+     * 
+     * @param s is the filename of a .ft containing all the attributes of Person objects that will be created by the method.
+     * @return an array of Person objects given the filename of a .ft file
+     */
     public Person[] loadTree(String s){
         i = 0;
         nameListSmall = new ArrayList<>();
@@ -154,8 +159,12 @@ public class TreeReader {
         }
         
         return currentTree;
-        
     }
+    
+    /**
+     * 
+     * @param p is an array of Person objects
+     */
     public void setMain(Person[] p){
         currentTree = p;
         /*linkCount = 3;
@@ -166,6 +175,10 @@ public class TreeReader {
         
     }
     
+    /**
+     * 
+     * @param s is the filename of the .ft file that this method will write
+     */
     public void writeTree(String s){
         filenameOut = s +".ft";
         PrintWriter writer = null;
@@ -194,6 +207,11 @@ public class TreeReader {
         writer.close();
     }
     
+    /**
+     * 
+     * @param name is a String the user wants to assign to a Person
+     * @return a boolean that determines whether the name is already in use by someone in the tree
+     */
     public boolean nameChecker(String name){
        int j = 0;
        boolean state = true;
@@ -207,6 +225,12 @@ public class TreeReader {
        return state;
     }
     
+    /**
+     * 
+     * @param tree the array of Person objects being searched
+     * @param s name of the Person being searched for
+     * @return the Person being searched for given a name s
+     */
     public Person personSearch(Person[] tree, String s) {
          Person found = null;
          for (int n=0;n<tree.length;n++) {
@@ -218,6 +242,11 @@ public class TreeReader {
          return found;
      }
     
+    /**
+     * 
+     * @param p is a Person  object whose list of ancestors will be determined
+     * @return a String containing the sorted list of the names of the ancestors of Person p separated by a " "
+     */
     public String ancestors(Person p){
         ArrayList<String> ancestorsList = new ArrayList<>();
         String ancestors = "";
@@ -273,6 +302,11 @@ public class TreeReader {
         return descendants;
     }
     
+    /**
+     * 
+     * @return a boolean disc that determines whether or not a family tree is disconnected or contains Person objects without a parent
+     * (aside from the root)
+     */
     public boolean orphanCheck(){
         boolean disc = false;
         int orphans = 0;
