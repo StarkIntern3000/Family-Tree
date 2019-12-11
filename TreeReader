@@ -66,27 +66,62 @@ public class TreeReader {
                 
                 if (lineRead[0].equals("name")) {
                     name = lineRead[1];
-                    if (nameChecker(name)){
+                    String[] splitNewName = name.split("");
+                            int i = 0;
+                            boolean lettersChecker = true;
+                            while(i<splitNewName.length){
+                                if(Character.isLetter(name.charAt(i))){
+                                    i++;
+                                }else{
+                                    lettersChecker=false;
+                                    break;
+                                }
+                            }
+                            if(lettersChecker == false){
+                                System.out.println("Error: invalid input for name");
+                                break;
+                            }
+                    boolean exists = nameChecker(name);
+                    if (exists&& lettersChecker){
                         n = true;
                     }
-                    else {
+                    else if (exists && !lettersChecker){
                         System.out.println("Error: person " + name+ " already exists.");
                     }
                 }
                 
                 if (lineRead[0].equals("age")) {
-                    age = Integer.parseInt(lineRead[1]);
-                    a = true;
+                    try {  
+                        age = Integer.parseInt(lineRead[1]);
+                        a = true;
+                    } catch(NumberFormatException e){
+                        System.out.println("Error: invalid input for age");
+                        a = false;
+                    }
                 }
                 
                 if (lineRead[0].equals("sex")) {
-                    sex = Boolean.valueOf(lineRead[1]);
-                    se = true;
+                    String sexS = lineRead[1];
+                    sex = Boolean.valueOf(sexS);
+                    if (sexS.equals("true") || sexS.equals("false")){
+                        se = true;
+                    }
+                    else {
+                        System.out.println("Error: invalid input for sex");
+                        se = false;
+                    }
                 }
                 
                 if (lineRead[0].equals("gender")) {
-                    gender = lineRead[1].charAt(0);
-                    g = true;
+                    String genderS = lineRead[1];
+                    if(genderS.equals("M")|| genderS.equals("F") || genderS.equals("N")){
+                        gender = genderS.charAt(0);
+                        g = true;
+                    }
+                    else {
+                        System.out.println("Error: invalid input for gender");
+                        g = false;
+                    }
                 }
                 
                 if (lines == 4 && (n && a && se && g)){
