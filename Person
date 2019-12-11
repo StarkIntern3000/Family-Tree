@@ -1,4 +1,7 @@
 public class Person {
+    /**
+     * The Person class represents one person on the family tree. It contains all attributes for each person meaning their age, sex, and gender. Also includes the Person's height, depth, and pointers for the Person's children and parents.
+     */
     private String name;
     private int age;
     private boolean sex;
@@ -68,7 +71,7 @@ public class Person {
             children++;
             break;
         case 2:
-            System.out.println("Error: family tree is ill-formed; check if cycles are present");
+            System.out.println("Error: attempted to add a 3rd child to parent");
             cycle = true;
             break;
             
