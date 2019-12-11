@@ -261,11 +261,14 @@ public class TreeReader {
         else {
             descendantsList.add(p.returnName());
         }
+        
         Collections.sort(descendantsList);
         descendants = descendantsList.get(0);
         
         for (int i=1;i<descendantsList.size();i++) {
-            descendants = descendants + " " + descendantsList.get(i);
+            if (descendantsList.get(i) != p.returnName()) {
+                descendants = descendants + " " + descendantsList.get(i);
+            }
         }
         return descendants;
     }
