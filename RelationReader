@@ -16,8 +16,8 @@ public class RelationReader /*implements RelationVariable*/{
     }
     /**
      * 
-     * @param pa is the first Person object
-     * @param pb is the second Person object
+     * @param pa is the first Person object 
+    * @param pb is the second Person object
      * @return the Person who is the lowest common ancestor of pa and pb
      */
     public Person LCA(Person pa, Person pb){
@@ -110,6 +110,7 @@ public class RelationReader /*implements RelationVariable*/{
         
         else {
             //determining parent or child
+            System.out.println("dA: " + dA + " dB: " + dB);
             if (furthest == 1) {
                 return terminology.Term("child",dA,dB,pb.returnGender());
             }
