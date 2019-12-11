@@ -203,6 +203,21 @@ public class MainFile {
                                 System.out.println("Error: inputs must be distinct");
                                 break;
                             }
+                            String[] splitNewName = newName.split("");
+                            int i = 0;
+                            boolean lettersChecker = true;
+                            while(i<splitNewName.length){
+                                if(Character.isLetter(newName.charAt(i))){
+                                    i++;
+                                }else{
+                                    lettersChecker=false;
+                                    break;
+                                }
+                            }
+                            if(lettersChecker == false){
+                                System.out.println("Error: invalid input");
+                                break;
+                            }
                             boolean unique = tReader.nameChecker(newName);
                             if(tReader.personSearch(mainTree, name) != null && unique){
                                 checker = true;
@@ -226,7 +241,14 @@ public class MainFile {
                         case "edit-age":
                             name = inputArray[1];
                             String newAge = inputArray[2];
-                            
+                            try {  
+                                Integer.parseInt(newAge);  
+                            } catch(NumberFormatException e){  
+
+                                System.out.println("Error: invalid input");
+                                break;
+                                }  
+
                             if(tReader.personSearch(mainTree, name) != null){
                                 checker = true;
                                 tReader.personSearch(mainTree, name).AttriEditor("age",newAge);
@@ -264,10 +286,14 @@ public class MainFile {
                         case "edit-gender":
                             name = inputArray[1];
                             String newGender = inputArray[2];
-                            
+                            if(!newGender.equals("M")&&!newGender.equals("F")&&!newGender.equals("N")){
+                                System.out.println("Error: invalid input");
+                                break;
+                            }
                             if(tReader.personSearch(mainTree, name) != null){
                                 checker = true;
                                 tReader.personSearch(mainTree, name).AttriEditor("gender",newGender);
+                                System.out.println(newGender);
                                     break;
                             }
                             if(!checker){
@@ -338,3 +364,5 @@ public class MainFile {
             }      
         }
     }
+}
+
