@@ -129,6 +129,7 @@ public class MainFile {
                             System.out.println(tReader.ancestors(tReader.personSearch(mainTree, name)));
                             break;
                         case "descendants":
+                            name = inputArray[1];
                             boolean hasChildren = false;
                             if (tReader.personSearch(mainTree,name).returnLeft() != null) {
                                 hasChildren = true;
@@ -178,7 +179,10 @@ public class MainFile {
                         case "edit-name":
                             name = inputArray[1];
                             String newName = inputArray[2];
-                            
+                            if(name.equals(newName)){
+                                System.out.println("inputs must be distinct");
+                                break;
+                            }
                             boolean unique = tReader.nameChecker(newName);
                             if(tReader.personSearch(mainTree, name) != null && unique){
                                 checker = true;
@@ -253,8 +257,9 @@ public class MainFile {
                         case "relationship":
                             name = inputArray[1];
                             String nameCompared = inputArray[2];
-                            if(name == nameCompared){
+                            if(name.equals(nameCompared)){
                                 System.out.println("inputs must be distinct");
+                                break;
                             }
                             boolean nameAExist = false;
                             boolean nameBExist = false;
