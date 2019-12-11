@@ -1,6 +1,12 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * 
+ * The TreeReader class loads and writes an .ft file.
+ * Using the file, it also creates a binary tree using an array of Person objects.
+ * Other methods in TreeReader process data in the tree and also edit data in the tree. 
+ */
 public class TreeReader {
     private String filenameIn, filenameOut;
     private Person[] currentTree;
@@ -17,7 +23,7 @@ public class TreeReader {
     /**
      * 
      * @param s is the filename of a .ft containing all the attributes of Person objects that will be created by the method.
-     * @return an array of Person objects given the filename of a .ft file
+     * @return an array of Person objects given the filename of a .ft file.
      */
     public Person[] loadTree(String s){
         i = 0;
@@ -34,7 +40,6 @@ public class TreeReader {
         FileReader reader = null;
         try {
             reader = new FileReader(filenameIn);
-            //System.out.println("File " + filenameIn + " found.");
         } catch(FileNotFoundException F) {
             System.out.println("Error: file does not exist");   
         }
@@ -51,14 +56,12 @@ public class TreeReader {
                 
                 if (lineRead[0].equals("family")) {
                     familyName = lineRead[1];
-                    //System.out.println("FAMILY: " + familyName);
                 }
                 
                 if (lineRead[0].equals("count"))  {
                     count = Integer.parseInt(lineRead[1]);
                     currentTree = new Person[count];
                     lines = 0;
-                    //System.out.println("COUNT: " + count);
                 }
                 
                 if (lineRead[0].equals("name")) {
@@ -69,35 +72,23 @@ public class TreeReader {
                     else {
                         System.out.println("Error: person " + name+ " already exists.");
                     }
-                    //lines++;
-                    //System.out.println("Name checker: " + nameChecker(name));
-                    
-                    //System.out.println("NAME: " + name);
                 }
                 
                 if (lineRead[0].equals("age")) {
                     age = Integer.parseInt(lineRead[1]);
                     a = true;
-                    //lines++;
-                    //System.out.println("AGE: " + age + " LINES: " + lines);
                 }
-                
                 
                 if (lineRead[0].equals("sex")) {
                     sex = Boolean.valueOf(lineRead[1]);
                     se = true;
-                    //lines++;
-                    //System.out.println("SEX: " + sex);
                 }
-                
                 
                 if (lineRead[0].equals("gender")) {
                     gender = lineRead[1].charAt(0);
-                    //System.out.println("GENDER: " + gender);
                     g = true;
-                    //System.out.println(currentTree[x].returnName());
                 }
-                //System.out.println("lines: " + lines + " a: " + a + " n: " + n + " se: " + se + " g: " + g);
+                
                 if (lines == 4 && (n && a && se && g)){
                         currentTree[x] = (new Person(name,age,sex,gender));
                         System.out.println("added " + currentTree[x].returnName());
@@ -109,15 +100,16 @@ public class TreeReader {
                         built = true;
                         lines = 0;
                 }
+                
                 else if (lines == 4 && !(n && a && se && g) && (currentTree[count-1] == null)){
                     System.out.println("Error: person details are insufficient");
                     built = false;
                     
                 }
+                
                 if (lineRead[0].equals("links")) {
                     linkCount = Integer.parseInt(lineRead[1]);
                     linkArray = new String[linkCount];
-                    //System.out.println("LINKS: " + linkCount);
                 }
 
                 if (lineRead[0].equals("child")) {
@@ -128,20 +120,15 @@ public class TreeReader {
                 lines++;
             }
             boolean cycle = false;
+            
             if (currentTree.length > 0 && built){
-                //System.out.println(currentTree.length);
                 for (int m=0;m<linkArray.length;m++) {
                     String[] names = linkArray[m].split(" ");
                     String n1 = names[0];
                     String n2 = names[1];
-                    //System.out.println(n1);
-                    //System.out.println(n2);
-
                     Person p1 = personSearch(currentTree,n1);
                     Person p2 = personSearch(currentTree,n2);
-
-                    //System.out.println(p1);
-                    //System.out.println(p2.returnName());
+                    
                     if (p2 == currentTree[0]){
                         cycle = true;
                         System.out.println("Error: cannot set root node of family tree as a child");
@@ -151,16 +138,17 @@ public class TreeReader {
                     }
                 }
 
-                    //System.out.println(p2.returnParent().returnName());
-                }
-                boolean disconnected = false;
-                 if (built) {disconnected = orphanCheck();}
-                if (disconnected || cycle || !built){
-                    currentTree = null;
-                }
-                else if (!disconnected || !cycle || built){
-                    System.out.println(filenameIn + " has been loaded");
-                }
+            }
+            boolean disconnected = false;
+
+            if (built) {disconnected = orphanCheck();}
+
+            if (disconnected || cycle || !built){
+                currentTree = null;
+            }
+            else if (!disconnected || !cycle || built){
+                System.out.println(filenameIn + " has been loaded");
+            }
         }
         
         return currentTree;
@@ -172,12 +160,6 @@ public class TreeReader {
      */
     public void setMain(Person[] p){
         currentTree = p;
-        /*linkCount = 3;
-        linkArray = new String[3];
-        linkArray[0] = "child A B";
-        linkArray[1] = "child B C";
-        linkArray[2] = "child C D";*/
-        
     }
     
     /**
@@ -221,7 +203,6 @@ public class TreeReader {
        int j = 0;
        boolean state = true;
        while (j < count){
-           //System.out.println(name + " vs "+ currentTree[j].returnName());
            if (currentTree[j] != null && currentTree[j].returnName().equals(name)){
                state = false;
            }
