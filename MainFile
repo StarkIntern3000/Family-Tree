@@ -153,7 +153,16 @@ public class MainFile {
                                     System.out.println("No descendants");
                                 }
                                 else {
-                                    System.out.println(tReader.descendants(tReader.personSearch(mainTree,name)));
+                                    String desc = tReader.descendants(tReader.personSearch(mainTree,name));
+                                    String[] d = desc.split(" ");
+                                    String descendants = "";
+                                    for (int i=1;i<d.length;i++) {
+                                        if (d[i] != tReader.personSearch(mainTree,name).returnName()) {
+                                            descendants = descendants + " " + d[i];
+                                        }
+                                    }
+                                    System.out.println(descendants);
+                                    
                                 }
                                 checker = true;
                             }
@@ -361,4 +370,7 @@ public class MainFile {
                 else if(inputArray.length > 3){
                     System.out.println("Error: too many inputs from user");
                 }
-            }      
+            }
+        }
+    }
+}
