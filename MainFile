@@ -1,4 +1,4 @@
-
+  
 import java.util.*;
 
 public class MainFile {
@@ -24,9 +24,11 @@ public class MainFile {
                 continue;
             }
             
+            
             if(mainTree == null){
                 switch(type){
                     case "bye":
+                        
                         state = false;
                         System.out.println("Goodbye!");
                         break;
@@ -48,6 +50,43 @@ public class MainFile {
                         case "count":
                             System.out.println(mainTree.length);
                             break;
+                        case "age":
+                            System.out.println("too few inputs from user for operation");
+                            break;
+                            
+                        case "sex":
+                            System.out.println("too few inputs from user for operation");
+                            break;
+                        case "gender":
+                            System.out.println("too few inputs from user for operation");
+                            break;
+                        case "ancestors":
+                            System.out.println("too few inputs from user for operation");
+                            break;
+                        case "descendants":
+                            System.out.println("too few inputs from user for operation");
+                            break;
+                        case "load":
+                            System.out.println("too few inputs from user for operation");
+                            break;
+                        case "save":
+                            System.out.println("too few inputs from user for operation");
+                            break;
+                        case "edit-name":
+                            System.out.println("too few inputs from user for operation");
+                            break;
+                        case "edit-age":
+                            System.out.println("too few inputs from user for operation");
+                            break;
+                        case "edit-sex":
+                            System.out.println("too few inputs from user for operation");
+                            break;
+                        case "edit-gender":
+                            System.out.println("too few inputs from user for operation");
+                            break;
+                        case "relationship":
+                            System.out.println("too few inputs from user for operation");
+                            break;
                         default: 
                             System.out.println("unrecognized keyword " + type);
                     }
@@ -55,8 +94,7 @@ public class MainFile {
                     switch(type){
                         case "age":
                             name = inputArray[1];
-                            
-                            
+
                             if(tReader.personSearch(mainTree, name) != null){
                                 System.out.println(tReader.personSearch(mainTree, name).returnAge());
                                 checker = true;
@@ -91,7 +129,6 @@ public class MainFile {
                             System.out.println(tReader.ancestors(tReader.personSearch(mainTree, name)));
                             break;
                         case "descendants":
-                            name = inputArray[1];
                             boolean hasChildren = false;
                             if (tReader.personSearch(mainTree,name).returnLeft() != null) {
                                 hasChildren = true;
@@ -102,6 +139,7 @@ public class MainFile {
                             else {
                                 System.out.println(tReader.descendants(tReader.personSearch(mainTree,name)));
                             }
+
                             break;
                         case "load":
                             name = inputArray[1];
@@ -110,6 +148,27 @@ public class MainFile {
                         case "save":
                             name = inputArray[1];
                             tReader.writeTree(name);
+                            break;
+                        case "edit-name":
+                            System.out.println("too few inputs from user for operation");
+                            break;
+                        case "edit-age":
+                            System.out.println("too few inputs from user for operation");
+                            break;
+                        case "edit-sex":
+                            System.out.println("too few inputs from user for operation");
+                            break;
+                        case "edit-gender":
+                            System.out.println("too few inputs from user for operation");
+                            break;
+                        case "relationship":
+                            System.out.println("too few inputs from user for operation");
+                            break;
+                        case "bye":
+                            System.out.println("too many inputs from user for operation.");
+                            break;
+                        case "count":
+                            System.out.println("too many inputs from user for operation.");
                             break;
                         default: 
                             System.out.println("unrecognized keyword " + type);
@@ -194,6 +253,9 @@ public class MainFile {
                         case "relationship":
                             name = inputArray[1];
                             String nameCompared = inputArray[2];
+                            if(name == nameCompared){
+                                System.out.println("inputs must be distinct");
+                            }
                             boolean nameAExist = false;
                             boolean nameBExist = false;
                             if(tReader.personSearch(mainTree, name)!=null){
@@ -213,7 +275,33 @@ public class MainFile {
                                 System.out.println("no such person " + name);
                                 System.out.println("no such person " + nameCompared);
                             }
-                            
+                            break;
+                        case "age":
+                            System.out.println("too many inputs from user for operation");
+                            break;
+                        case "sex":
+                            System.out.println("too many inputs from user for operation");
+                            break;
+                        case "gender":
+                            System.out.println("too many inputs from user for operation");
+                            break;
+                        case "ancestors":
+                            System.out.println("too many inputs from user for operation");
+                            break;
+                        case "descendants":
+                            System.out.println("too many inputs from user for operation");
+                            break;
+                        case "load":
+                            System.out.println("too many inputs from user for operation");
+                            break;
+                        case "save":
+                            System.out.println("too many inputs from user for operation");
+                            break;
+                        case "bye":
+                            System.out.println("too many inputs from user for operation");
+                            break;
+                        case "count":
+                            System.out.println("too many inputs from user for operation");
                             break;
                         default: 
                             System.out.println("unrecognized keyword " + type);
