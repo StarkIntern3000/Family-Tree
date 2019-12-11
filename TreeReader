@@ -288,6 +288,7 @@ public class TreeReader {
      * @return a String containing the sorted list of the names of the descendants of Person p separated by a " "
      */
     public String descendants(Person p) {
+        System.out.println(p.returnName());
         String descendants = "";
         ArrayList<String> descendantsList = new ArrayList<>();
         if (p.returnChildren() == 1) {
@@ -303,15 +304,39 @@ public class TreeReader {
             descendantsList.add(p.returnName());
         }
         
-        Collections.sort(descendantsList);
-        descendants = descendantsList.get(0);
+        String[] unsorted = new String[descendantsList.size()];
+        for (int i = 0; i < unsorted.length; i++){
+            unsorted[i] = descendantsList.get(i);
+        }
+        String[] sorted = sort(unsorted);
+        descendants = sorted[0];
         
         for (int i=1;i<descendantsList.size();i++) {
             if (descendantsList.get(i) != p.returnName()) {
-                descendants = descendants + " " + descendantsList.get(i);
+                descendants = descendants + " " + sorted[i];
             }
         }
         return descendants;
+    }
+    public String[] sort(String[] s){
+        String[] unsorted = s;
+        for (int i = 1; i < unsorted.length; i++){
+            for (int j = i - 2; j > 0; j--){
+                int first = unsorted[j].charAt(0);
+                int second = unsorted[j+1].charAt(0);
+                int letter = 0;
+                while (first == second){
+                    first = unsorted[j].charAt(letter);
+                    second = unsorted[j+1].charAt(letter);
+                }
+                if (first > second){
+                    String swap = unsorted[j];
+                    unsorted[j] = unsorted[j+1];
+                    unsorted[j+1] = swap;
+                }
+            }
+        }
+        return unsorted;
     }
     
     /**
