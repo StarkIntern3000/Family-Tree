@@ -175,7 +175,7 @@ public class TreeReader {
             System.out.println("File "+ filenameOut + "not found.");
         }
         if (writer != null){
-            System.out.println("Now writing");
+            System.out.println(filenameOut + " saved.");
             writer.println("family " + familyName);
             writer.println("count " + currentTree.length);
             for(int i = 0; i < currentTree.length; i++){
@@ -194,35 +194,17 @@ public class TreeReader {
         writer.close();
     }
     
-      public boolean nameChecker(String name){
-        char firstCharacter = name.charAt(0);
-        
-        int index = firstCharacter;
-        boolean state = true;
-        if(index < 97){
-            int j = 0;
-            index = index - 65;
-            while(j<nameListSmall.get(index).size()){
-                
-                if(name.equals(nameListSmall.get(index).get(j))){
-                    state = false;
-                }
-                j++;
-            }
-            nameListSmall.get(index).add(name);
-        }else if(index >= 97){
-            int k = 0;
-            index = index - 97;
-            while(k<nameListBig.get(index).size()){
-                
-                if(name.equals(nameListBig.get(index).get(k)) ){
-                    state = false;
-                }
-                k++;
-            }
-            nameListBig.get(index).add(name);
-        }
-        return state;
+    public boolean nameChecker(String name){
+       int j = 0;
+       boolean state = true;
+       while (j < count){
+           //System.out.println(name + " vs "+ currentTree[j].returnName());
+           if (currentTree[j].returnName().equals(name)){
+               state = false;
+           }
+        j++;
+       }
+       return state;
     }
     
     public Person personSearch(Person[] tree, String s) {
