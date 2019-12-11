@@ -91,7 +91,6 @@ public class TreeReader {
                 
                 if (lines == 4 && (n && a && se && g)){
                         currentTree[x] = (new Person(name,age,sex,gender));
-                        System.out.println("added " + currentTree[x].returnName());
                         x++;
                         n = false;
                         a = false;
@@ -101,7 +100,7 @@ public class TreeReader {
                         lines = 0;
                 }
                 
-                else if (lines == 4 && !(n && a && se && g) && (currentTree[count-1] == null)){
+                else if (lines == 4 && !(n && a && se && g) && scan.hasNext()){
                     System.out.println("Error: person details are insufficient");
                     built = false;
                     
@@ -114,10 +113,13 @@ public class TreeReader {
 
                 if (lineRead[0].equals("child")) {
                     linkArray[y] = lineRead[1] + " " + lineRead[2];
-                    //System.out.println("RELATIONSHIP: " + linkArray[y]);
                     y++;
                 }
                 lines++;
+            }
+            if (currentTree[count-1] == null){
+                System.out.println("Error: declared count does not match number of person entries");
+                built = false;
             }
             boolean cycle = false;
             
@@ -244,7 +246,6 @@ public class TreeReader {
                 String parent = p.returnParent().returnName();
                 ancestorsList.add(parent);
                 p = p.returnParent();
-                System.out.println("added " + parent);
             }
             
             Collections.sort(ancestorsList);
