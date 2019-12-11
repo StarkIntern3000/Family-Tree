@@ -1,5 +1,8 @@
 import java.util.*;
-
+/**
+ * The MainFile class is where most of the user interface occurs. It creates a TreeReader & RealtionReader to load and process commands from  the command line, and prints out the data.
+ * 
+ */
 public class MainFile {
     public static void main(String args[]){
         Person[] mainTree = null;
@@ -10,7 +13,7 @@ public class MainFile {
         String name;
         boolean state;
         state = true;
-        
+        //While the program is still running
         while(state){
             boolean checker = false;
             Scanner scanner = new Scanner(System. in); 
@@ -322,3 +325,4 @@ public class MainFile {
             }      
         }
     }
+}
