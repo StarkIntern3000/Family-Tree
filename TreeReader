@@ -254,21 +254,24 @@ public class TreeReader {
      */
     public String descendants(Person p) {
         String descendants = "";
+        ArrayList<String> descendantsList = new ArrayList();
         if (p.returnChildren() == 1) {
-            descendants = descendants + " " + p.returnName() + " " + descendants(p.returnLeft());
+            descendantsList.add(p.returnName()) ;
+            descendantsList.add(descendants(p.returnLeft()));
         }
         else if (p.returnChildren() == 2) {
-            descendants = descendants + " " + p.returnName() + " " + descendants(p.returnLeft()) + " " + descendants(p.returnRight());
+            descendantsList.add(p.returnName());
+            descendantsList.add(descendants(p.returnLeft()));
+            descendantsList.add(descendants(p.returnRight()));
         }
         else {
-            descendants = descendants + " " + p.returnName();
+            descendantsList.add(p.returnName());
         }
-        String[] d = descendants.split(" ");
-        sort(d);
-        descendants = "";
+        sort(descendantsList);
+        descendants = descendantsList.get(0);
         
-        for (int i=0;i<d.length;i++) {
-            descendants = descendants + " " + d[i];
+        for (int i=1;i<descendantsList.size();i++) {
+            descendants = descendants + " " + descendantsList.get(i);
         }
         return descendants;
     }
@@ -278,8 +281,8 @@ public class TreeReader {
      * @param unsorted is an unsorted array of Strings 
      * @return a sorted version of the unsorted array of Strings
      */
-    public String[] sort(String[] unsorted){
-        String[] sorted = new String[unsorted.length];
+    public ArrayList<String> sort(ArrayList<String> unsorted){
+        ArrayList<String> sorted = unsorted;
         return sorted;
     }
     
