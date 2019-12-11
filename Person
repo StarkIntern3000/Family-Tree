@@ -36,31 +36,39 @@ public class Person {
                 break;
         }
     }
-      public void addChild(Person c){
+      public boolean addChild(Person c){
+        boolean cycle = false;
         switch (children){
-            case 0:
-                left = c;
-                left.assignParent(this);
-                children++;
-                break;
-            case 1:
-                right = c;
-                right.assignParent(this);
-                children++;
-                break;
-            case 2:
-                //insert error for something
-                break;
+        case 0:
+            left = c;
+            cycle = left.assignParent(this);
+            children++;
+            break;
+        case 1:
+            right = c;
+            cycle = right.assignParent(this);
+            children++;
+            break;
+        case 2:
+            System.out.println("Error: family tree is ill-formed; check if cycles are present");
+            cycle = true;
+            break;
+            
         }
+        
+        return cycle;
     }
-    public void assignParent(Person p){
+    public boolean assignParent(Person p){
+        boolean cycle = false;
         if (parentCount){
-            //error
+            cycle = true;
+            System.out.println("Error: family tree is ill-formed; check if cycles are present");
         }
         else {
             parent = p;
             parentCount = true;
         }
+        return cycle;
     }
     public void assignHeight(int h){
         height = h;
@@ -85,8 +93,15 @@ public class Person {
         return age;
     }
     
-    public boolean returnSex(){
-        return sex;
+    public String returnSex(){
+        String returnS;
+        if (sex){
+            returnS = "male";
+        }
+        else{
+            returnS = "female";
+        }
+        return returnS;
     }
     
     public char returnGender(){

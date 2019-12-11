@@ -20,6 +20,7 @@ public class TreeReader {
      * @return an array of Person objects given the filename of a .ft file
      */
     public Person[] loadTree(String s){
+        i = 0;
         nameListSmall = new ArrayList<>();
         nameListBig = new ArrayList<>();
         while(i<52){  
@@ -35,7 +36,7 @@ public class TreeReader {
             reader = new FileReader(filenameIn);
             System.out.println("File " + filenameIn + " found.");
         } catch(FileNotFoundException F) {
-            System.out.println("File \"" + filenameIn+ "\" not found.");   
+            System.out.println("Error: file does not exist");   
         }
         if (reader != null){
             scan = new Scanner(reader);
@@ -95,38 +96,41 @@ public class TreeReader {
                     y++;
                 }
             }
-             
-        }
-        boolean cycle = false;
-        if (currentTree.length > 0){
-            //System.out.println(currentTree.length);
-            for (int m=0;m<linkArray.length;m++) {
-                String[] names = linkArray[m].split(" ");
-                String n1 = names[0];
-                String n2 = names[1];
-                //System.out.println(n1);
-                //System.out.println(n2);
+            boolean cycle = false;
+            if (currentTree.length > 0){
+                //System.out.println(currentTree.length);
+                for (int m=0;m<linkArray.length;m++) {
+                    String[] names = linkArray[m].split(" ");
+                    String n1 = names[0];
+                    String n2 = names[1];
+                    //System.out.println(n1);
+                    //System.out.println(n2);
 
-                Person p1 = personSearch(currentTree,n1);
-                Person p2 = personSearch(currentTree,n2);
-                
-                //System.out.println(p1);
-                //System.out.println(p2.returnName());
-                if (p2 == currentTree[0]){
-                    cycle = true;
-                    System.out.println("Error: cannot set root node of family tree as a child");
+                    Person p1 = personSearch(currentTree,n1);
+                    Person p2 = personSearch(currentTree,n2);
+
+                    //System.out.println(p1);
+                    //System.out.println(p2.returnName());
+                    if (p2 == currentTree[0]){
+                        cycle = true;
+                        System.out.println("Error: cannot set root node of family tree as a child");
+                    }
+                    else{
+                        cycle = p1.addChild(p2);
+                    }
                 }
-                else{
-                    cycle = p1.addChild(p2);
+
+                    //System.out.println(p2.returnParent().returnName());
                 }
-                //System.out.println(p2.returnParent().returnName());
-            }
+                boolean disconnected = orphanCheck();
+                if (disconnected || cycle){
+                    currentTree = null;
+                }
         }
-        boolean disconnected = orphanCheck();
-        if (disconnected || cycle){
-            currentTree = null;
-        }
-        return currentTree;   
+        
+        return currentTree;
+        
+
     }
     
     /**
@@ -221,66 +225,35 @@ public class TreeReader {
          Person found = null;
          for (int n=0;n<tree.length;n++) {
              Person p = tree[n];
-             //System.out.println(p.returnName());
              if (p.returnName().equals(s)) {
                 found = p;
              }
          }
-         //System.out.println(found.returnName());
          return found;
      }
     
-    /**
-     * 
-     * @param p is a Person object whose list of ancestors will be determined
-     */
-    public void ancestors(Person p){
+    public String ancestors(Person p){
+        ArrayList<String> ancestorsList = new ArrayList<>();
         String ancestors = "";
-        while (p.returnDepth(0) >= 1){
-            String parent = p.returnParent().returnName();
-            ancestors += " " + parent;
-            p = p.returnParent();
-            System.out.println("added " + parent);
+        if (p.returnDepth(0) == 0){
+            System.out.println("No ancestors");
         }
-        String ancestorsUnsorted[] = ancestors.split(" ");
-        //sort ancestorList[]
-        System.out.println("ancestors: " + ancestors);
-    }
-    
-    /**
-     *
-     * @param p is a Person object whose list of descendants will be determined
-     * @return a String containing the sorted list of the names of the descendants of Person p separated by a " "
-     */
-    public String descendants(Person p) {
-        String descendants = "";
-        if (p.returnChildren() == 1) {
-            descendants = descendants + " " + p.returnName() + " " + descendants(p.returnLeft());
-        }
-        else if (p.returnChildren() == 2) {
-            descendants = descendants + " " + p.returnName() + " " + descendants(p.returnLeft()) + " " + descendants(p.returnRight());
-        }
-        else {
-            descendants = descendants + " " + p.returnName();
-        }
-        String[] d = descendants.split(" ");
-        sort(d);
-        descendants = "";
-        
-        for (int i=0;i<d.length;i++) {
-            descendants = descendants + " " + d[i];
-        }
-        return descendants;
-    }
-    
-    /**
-     * 
-     * @param unsorted is an unsorted array of Strings 
-     * @return a sorted version of the unsorted array of Strings
-     */
-    public String[] sort(String[] unsorted){
-        String[] sorted = new String[unsorted.length];
-        return sorted;
+        else{
+            while (p.returnDepth(0) >= 1){
+                String parent = p.returnParent().returnName();
+                ancestorsList.add(parent);
+                p = p.returnParent();
+                System.out.println("added " + parent);
+            }
+            
+            Collections.sort(ancestorsList);
+            boolean first = true;
+            for(String x : ancestorsList){
+                if (first) {ancestors = x; first = false;}
+                else {ancestors += " " + x;}
+            }         
+        }        
+        return ancestors;
     }
     
     /**
