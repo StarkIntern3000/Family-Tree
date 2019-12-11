@@ -3,9 +3,13 @@
 public class RelationVariable {
     
     public RelationVariable(){
-        
     }
     
+    /**
+     * 
+     * @param d is an integer
+     * @return the a String which is the ordinal version of the integer
+     */
     public String Ordinal(int d) {
         if (d == 1) {
             return "1st ";
@@ -20,6 +24,12 @@ public class RelationVariable {
             return d + "th ";
         }
     }
+    
+    /**
+     * 
+     * @param r is an integer
+     * @return a String "once", "twice", "thrice", "four times",...,"n times" given an integer 1,2,3,4,...,n respectfully
+     */
     public String Times(int r) {
         if (r == 1) {
             return "once ";
@@ -34,6 +44,15 @@ public class RelationVariable {
             return Integer.toString(r) + " times ";
         }
     }
+    
+    /**
+     * 
+     * @param s is a String that can be either "child" or "nibling"
+     * @param d1 is an integer that is the distance between the first Person and its lowest common ancestor with the second Person
+     * @param d2 is an integer that is the distance between the second Person and its lowest common ancestor with the first Person
+     * @param gender is the gender of the second Person
+     * @return a String with is the term used to describe the 1st Person and 2nd Person's relationship given s,d1,d2,and gender
+     */
     public String Term(String s,int d1,int d2,char gender) {
         if (s.equals("nibling")) {
             if (d1<d2) {
@@ -87,6 +106,13 @@ public class RelationVariable {
             return "Error";
         }
     }
+    
+    /**
+     * 
+     * @param n is an integer 
+     * @param f is an integer 
+     * @return a String of iterated "great" given n and f
+     */
     public String Great(int n, int f) {
         String great = "";
         if (n==0) {
