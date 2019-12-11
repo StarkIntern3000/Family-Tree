@@ -16,7 +16,6 @@ public class TreeReader {
     private int age;
     private boolean sex;
     private char gender;
-    private ArrayList<ArrayList<String>> nameListSmall, nameListBig;
     private int i = 0;
     private int x, y;
     
@@ -26,15 +25,6 @@ public class TreeReader {
      * @return an array of Person objects given the filename of a .ft file.
      */
     public Person[] loadTree(String s){
-        i = 0;
-        nameListSmall = new ArrayList<>();
-        nameListBig = new ArrayList<>();
-        while(i<52){  
-            ArrayList<String> inArray = new ArrayList<>();
-            nameListSmall.add(inArray);
-            nameListBig.add(inArray);
-            i++;
-        }
         filenameIn = s + ".ft";
         Scanner scan = null;
         FileReader reader = null;
@@ -299,7 +289,7 @@ public class TreeReader {
      */
     public String descendants(Person p) {
         String descendants = "";
-        ArrayList<String> descendantsList = new ArrayList();
+        ArrayList<String> descendantsList = new ArrayList<>();
         if (p.returnChildren() == 1) {
             descendantsList.add(p.returnName()) ;
             descendantsList.add(descendants(p.returnLeft()));
