@@ -62,8 +62,13 @@ public class TreeReader {
                 }
                 
                 if (lineRead[0].equals("name")) {
-                    n = true;
                     name = lineRead[1];
+                    if (nameChecker(name)){
+                        n = true;
+                    }
+                    else {
+                        System.out.println("Error: person " + name+ " already exists.");
+                    }
                     //lines++;
                     //System.out.println("Name checker: " + nameChecker(name));
                     
@@ -217,7 +222,7 @@ public class TreeReader {
        boolean state = true;
        while (j < count){
            //System.out.println(name + " vs "+ currentTree[j].returnName());
-           if (currentTree[j].returnName().equals(name)){
+           if (currentTree[j] != null && currentTree[j].returnName().equals(name)){
                state = false;
            }
         j++;
