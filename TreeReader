@@ -107,6 +107,11 @@ public class TreeReader {
                 }
                 
                 if (lineRead[0].equals("links")) {
+                    n = true;
+                    a = true;
+                    se = true;
+                    g = true;
+                    lines = 5;
                     linkCount = Integer.parseInt(lineRead[1]);
                     linkArray = new String[linkCount];
                 }
@@ -131,9 +136,14 @@ public class TreeReader {
                     Person p1 = personSearch(currentTree,n1);
                     Person p2 = personSearch(currentTree,n2);
                     
-                    if (p2 == currentTree[0]){
+                    if (p1 == null || p2 == null){
+                        System.out.println("Error: attempted to link nonexistent person(s)");
+                        built = false;
+                    }
+                    else if (p2 == currentTree[0]){
                         cycle = true;
                         System.out.println("Error: cannot set root node of family tree as a child");
+                        built = false;
                     }
                     else{
                         cycle = p1.addChild(p2);
@@ -142,9 +152,7 @@ public class TreeReader {
 
             }
             boolean disconnected = false;
-
             if (built) {disconnected = orphanCheck();}
-
             if (disconnected || cycle || !built){
                 currentTree = null;
             }
@@ -239,7 +247,7 @@ public class TreeReader {
         ArrayList<String> ancestorsList = new ArrayList<>();
         String ancestors = "";
         if (p.returnDepth(0) == 0){
-            System.out.println("No ancestors");
+            ancestors = "No ancestors";
         }
         else{
             while (p.returnDepth(0) >= 1){
