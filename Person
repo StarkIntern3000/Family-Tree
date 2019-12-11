@@ -93,8 +93,15 @@ public class Person {
         return age;
     }
     
-    public boolean returnSex(){
-        return sex;
+    public String returnSex(){
+        String returnS;
+        if (sex){
+            returnS = "male";
+        }
+        else{
+            returnS = "female";
+        }
+        return returnS;
     }
     
     public char returnGender(){
