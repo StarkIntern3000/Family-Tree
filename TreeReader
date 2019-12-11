@@ -15,6 +15,7 @@ public class TreeReader {
     private int x, y;
     
     public Person[] loadTree(String s){
+        i = 0;
         nameListSmall = new ArrayList<>();
         nameListBig = new ArrayList<>();
         while(i<52){  
@@ -30,7 +31,7 @@ public class TreeReader {
             reader = new FileReader(filenameIn);
             System.out.println("File " + filenameIn + " found.");
         } catch(FileNotFoundException F) {
-            System.out.println("File \"" + filenameIn+ "\" not found.");   
+            System.out.println("Error: file does not exist");   
         }
         if (reader != null){
             scan = new Scanner(reader);
@@ -90,37 +91,38 @@ public class TreeReader {
                     y++;
                 }
             }
-             
-        }
-        boolean cycle = false;
-        if (currentTree.length > 0){
-            //System.out.println(currentTree.length);
-            for (int m=0;m<linkArray.length;m++) {
-                String[] names = linkArray[m].split(" ");
-                String n1 = names[0];
-                String n2 = names[1];
-                //System.out.println(n1);
-                //System.out.println(n2);
+            boolean cycle = false;
+            if (currentTree.length > 0){
+                //System.out.println(currentTree.length);
+                for (int m=0;m<linkArray.length;m++) {
+                    String[] names = linkArray[m].split(" ");
+                    String n1 = names[0];
+                    String n2 = names[1];
+                    //System.out.println(n1);
+                    //System.out.println(n2);
 
-                Person p1 = personSearch(currentTree,n1);
-                Person p2 = personSearch(currentTree,n2);
-                
-                //System.out.println(p1);
-                //System.out.println(p2.returnName());
-                if (p2 == currentTree[0]){
-                    cycle = true;
-                    System.out.println("Error: cannot set root node of family tree as a child");
+                    Person p1 = personSearch(currentTree,n1);
+                    Person p2 = personSearch(currentTree,n2);
+
+                    //System.out.println(p1);
+                    //System.out.println(p2.returnName());
+                    if (p2 == currentTree[0]){
+                        cycle = true;
+                        System.out.println("Error: cannot set root node of family tree as a child");
+                    }
+                    else{
+                        cycle = p1.addChild(p2);
+                    }
                 }
-                else{
-                    cycle = p1.addChild(p2);
+
+                    //System.out.println(p2.returnParent().returnName());
                 }
-                //System.out.println(p2.returnParent().returnName());
-            }
+                boolean disconnected = orphanCheck();
+                if (disconnected || cycle){
+                    currentTree = null;
+                }
         }
-        boolean disconnected = orphanCheck();
-        if (disconnected || cycle){
-            currentTree = null;
-        }
+        
         return currentTree;
         
     }
@@ -197,31 +199,35 @@ public class TreeReader {
          Person found = null;
          for (int n=0;n<tree.length;n++) {
              Person p = tree[n];
-             //System.out.println(p.returnName());
              if (p.returnName().equals(s)) {
                 found = p;
              }
          }
-         //System.out.println(found.returnName());
          return found;
      }
     
-    public void ancestors(Person p){
+    public String ancestors(Person p){
+        ArrayList<String> ancestorsList = new ArrayList<>();
         String ancestors = "";
-        while (p.returnDepth(0) >= 1){
-            String parent = p.returnParent().returnName();
-            ancestors += " " + parent;
-            p = p.returnParent();
-            System.out.println("added " + parent);
+        if (p.returnDepth(0) == 0){
+            System.out.println("No ancestors");
         }
-        String ancestorsUnsorted[] = ancestors.split(" ");
-        //sort ancestorList[]
-        System.out.println("ancestors: " + ancestors);
-    }
-    
-    public String[] sort(String[] unsorted){
-        String[] sorted = new String[unsorted.length];
-        return sorted;
+        else{
+            while (p.returnDepth(0) >= 1){
+                String parent = p.returnParent().returnName();
+                ancestorsList.add(parent);
+                p = p.returnParent();
+                System.out.println("added " + parent);
+            }
+            
+            Collections.sort(ancestorsList);
+            boolean first = true;
+            for(String x : ancestorsList){
+                if (first) {ancestors = x; first = false;}
+                else {ancestors += " " + x;}
+            }         
+        }        
+        return ancestors;
     }
     
     public boolean orphanCheck(){
