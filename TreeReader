@@ -152,7 +152,7 @@ public class TreeReader {
 
             }
             boolean disconnected = false;
-            if (built) {disconnected = orphanCheck();}
+            if (built && !cycle) {disconnected = orphanCheck();}
             if (disconnected || cycle || !built){
                 currentTree = null;
             }
