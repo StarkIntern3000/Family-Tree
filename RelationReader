@@ -14,6 +14,12 @@ public class RelationReader /*implements RelationVariable*/{
         terminology = new RelationVariable();
         greatness = new RelationVariable();
     }
+    /**
+     * 
+     * @param pa is the first Person object
+     * @param pb is the second Person object
+     * @return the Person who is the lowest common ancestor of pa and pb
+     */
     public Person LCA(Person pa, Person pb){
         Person A = pa, B = pb;
         int depthA = A.returnDepth(0), depthB = B.returnDepth(0);
@@ -33,21 +39,6 @@ public class RelationReader /*implements RelationVariable*/{
                 depthB = B.returnDepth(0);
             }
         }
-        
-        /*
-            makes sure that LCA is at least 2 generations away
-        */
-                //this is andie: for some reason this part of the code was 
-                //making the lca one generation higher than it should be so i removed it
-        
-//        while (dA < 1 || dB < 1){
-//            A = A.returnParent();
-//            B = B.returnParent();
-//            dA++;
-//            dB++;
-//        }
-
-
         /*
             compares each person's respective ancestor of that generation until they find the same person
         */
@@ -62,10 +53,13 @@ public class RelationReader /*implements RelationVariable*/{
         return lowestCA;
     }
     
-    
+    /**
+     * 
+     * @param pa is the first Person object
+     * @param pb is the second Person object
+     * @return a String that indicates the relationship between pa and pb in the point of view of Person pa
+     */
     public String Relationship(Person pa, Person pb) {
-//        dA = dA-1;
-//        dB = dB-1;
 
         //assigning nearest and furthest
         dA = 0;
@@ -123,14 +117,5 @@ public class RelationReader /*implements RelationVariable*/{
                 return greatness.Great(nearest,furthest) + "grand" + terminology.Term("child",dA,dB,pb.returnGender());
             }
         }
-    }
-    
-    
-    public int getDA() {
-        return dA;
-    }
-    public int getDB() {
-        return dB;
-    }
-    
+    }   
 }
