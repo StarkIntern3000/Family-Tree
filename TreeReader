@@ -166,14 +166,6 @@ public class TreeReader {
     
     /**
      * 
-     * @param p is an array of Person objects
-     */
-    public void setMain(Person[] p){
-        currentTree = p;
-    }
-    
-    /**
-     * 
      * @param s is the filename of the .ft file that this method will write
      */
     public void writeTree(String s){
