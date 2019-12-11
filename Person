@@ -10,6 +10,13 @@ public class Person {
     private boolean parentCount;
     private int height,depth;
     
+    /**
+     * 
+     * @param n is a String that holds the name of the Person object
+     * @param a is an integer that holds the age of the Person object
+     * @param s is a boolean that determines the sex of the Person object
+     * @param g is a character that holds the gender of the Person object
+     */
     public Person(String n, int a, boolean s, char g ){
         name = n;
         age = a;
@@ -20,6 +27,11 @@ public class Person {
         parent = null;
     }
     
+    /**
+     * 
+     * @param type is a String that holds the type of attribute that is to be edit
+     * @param newEntry is a String that holds the new entry to replace the original value of the attribute
+     */
     public void AttriEditor(String type, String newEntry){
         switch(type){
             case "name":
@@ -36,7 +48,13 @@ public class Person {
                 break;
         }
     }
-      public boolean addChild(Person c){
+    
+    /**
+     * 
+     * @param c is a Person object that will be added as a child
+     * @return a boolean that determines whether or not a cycle was formed
+     */
+    public boolean addChild(Person c){
         boolean cycle = false;
         switch (children){
         case 0:
@@ -58,6 +76,12 @@ public class Person {
         
         return cycle;
     }
+    
+    /**
+     * 
+     * @param p is a Person object that will be assigned as a parent
+     * @return is a boolean that determines whether or not a cycle was formed
+     */
     public boolean assignParent(Person p){
         boolean cycle = false;
         if (parentCount){
@@ -70,43 +94,84 @@ public class Person {
         }
         return cycle;
     }
+    
+    /**
+     * 
+     * @param h is an integer that will be assigned as the Person object's height
+     */
     public void assignHeight(int h){
         height = h;
     }
+    
+    /**
+     * 
+     * @param d is an integer that will be assigned as the Person object's depth
+     */
     public void assignDepth(int d){
         depth = d;
     }
+    
+    /**
+     * 
+     * @return the left child of the Person 
+     */
     public Person returnLeft(){
         return left;
     }
+    
+    /**
+     * 
+     * @return the right child of the Person
+     */
     public Person returnRight(){
         return right;
     }
+    
+    /**
+     * 
+     * @return the parent of the Person
+     */
     public Person returnParent(){
         return parent;
     }
+    
+    /**
+     * 
+     * @return a String that holds the name of the Person
+     */
     public String returnName(){
         return name;
     }
     
+    /**
+     * 
+     * @return an integer that holds the age of the Person
+     */
     public int returnAge(){
         return age;
     }
     
-    public String returnSex(){
-        String returnS;
-        if (sex){
-            returnS = "male";
-        }
-        else{
-            returnS = "female";
-        }
-        return returnS;
+    /**
+     * 
+     * @return a boolean that determines the sex of the Person
+     */
+    public boolean returnSex(){
+        return sex;
     }
     
+    /**
+     * 
+     * @return a character that holds the gender of the Person
+     */
     public char returnGender(){
         return gender;
     }
+    
+    /**
+     * 
+     * @param h is an integer that holds the initial value of height which should be 0
+     * @return the height of the Person object
+     */
     public int returnHeight(int h){
         height = h;
         if (this.returnLeft() != null) {
@@ -121,6 +186,12 @@ public class Person {
             return height;
         }
     }
+    
+    /**
+     * 
+     * @param d is an integer that holds the initial value of depth which should be 0
+     * @return the depth of the Person object
+     */
     public int returnDepth(int d) {
         depth = d;
         if (this.returnParent() != null) {
@@ -130,6 +201,14 @@ public class Person {
         else {
             return depth;
         }
+    }
+    
+    /**
+     * 
+     * @return the number of children that the Person has
+     */
+    public int returnChildren() {
+        return children;
     }
   
 }
