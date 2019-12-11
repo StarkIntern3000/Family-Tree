@@ -88,6 +88,7 @@ public class MainFile {
                             break;
                         case "ancestors":
                             name = inputArray[1];
+                            System.out.println(tReader.ancestors(tReader.personSearch(mainTree, name)));
                             break;
                         case "descendants":
                             name = inputArray[1];
